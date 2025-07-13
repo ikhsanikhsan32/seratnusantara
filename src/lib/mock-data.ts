@@ -83,3 +83,16 @@ export const faqs: FaqItem[] = [
   { id: '3', question: 'Do you ship internationally?', answer: 'Yes, we ship to over 100 countries. International shipping costs and delivery times vary by location.' },
   { id: '4', question: 'What payment methods do you accept?', answer: 'We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and CommerceHub gift cards.' },
 ];
+
+export type NewsItem = {
+  id: string;
+  text: string;
+  link?: string;
+};
+
+export const newsItems: NewsItem[] = [
+    { id: '1', text: '🎉 Summer Sale! Get up to 50% off on selected items.', link: '/shop' },
+    { id: '2', text: '🚚 Free shipping on all orders over $50.' },
+    { id: '3', text: '✨ New collection just dropped! Check out the latest trends.', link: '/shop' },
+    { id: '4', text: 'Join our loyalty program and earn points on every purchase.' },
+];
