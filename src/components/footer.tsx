@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Package2, Twitter, Facebook, Instagram } from 'lucide-react';
+import { Twitter, Facebook, Instagram } from 'lucide-react';
+import { Logo } from './logo';
 
 export function Footer() {
   return (
@@ -11,8 +12,7 @@ export function Footer() {
           {/* About Section */}
           <div className="md:col-span-1">
             <Link href="/" className="mb-4 flex items-center space-x-2">
-              <Package2 className="h-8 w-8 text-primary" />
-              <span className="font-headline text-xl font-bold">CommerceHub</span>
+              <Logo />
             </Link>
             <p className="text-sm text-muted-foreground">
               Your one-stop shop for modern, high-quality products.
@@ -57,7 +57,7 @@ export function Footer() {
         
         <div className="mt-8 flex flex-col items-center justify-between border-t pt-6 sm:flex-row">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} CommerceHub. All rights reserved.
+            &copy; {new Date().getFullYear()} Serat Nusantara. All rights reserved.
           </p>
           <div className="mt-4 flex space-x-4 sm:mt-0">
             <Link href="#" className="text-muted-foreground hover:text-primary"><Twitter className="h-5 w-5" /></Link>

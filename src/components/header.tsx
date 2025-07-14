@@ -14,6 +14,7 @@ import {
   User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Logo } from "./logo";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -30,8 +31,7 @@ export function Header() {
       <div className="container flex h-16 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Package2 className="h-6 w-6 text-primary" />
-            <span className="font-headline font-bold">CommerceHub</span>
+            <Logo />
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             {navLinks.map((link) => (
@@ -95,8 +95,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="left" className="w-[300px] sm:w-[400px]">
               <Link href="/" className="mr-6 mb-4 flex items-center space-x-2">
-                <Package2 className="h-6 w-6 text-primary" />
-                <span className="font-headline font-bold">CommerceHub</span>
+                <Logo />
               </Link>
               <nav className="flex flex-col space-y-4">
                 {navLinks.map((link) => (
