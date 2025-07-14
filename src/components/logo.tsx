@@ -9,7 +9,6 @@ export function Logo({ className }: { className?: string }) {
           alt="Serat Nusantara Logo"
           width={150}
           height={38}
-          className="h-10 w-auto"
           priority
         />
     </div>
