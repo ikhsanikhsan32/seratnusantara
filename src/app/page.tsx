@@ -131,7 +131,7 @@ export default function Home() {
           <h2 className="font-headline mb-8 text-center text-3xl font-bold">
             Shop by Category
           </h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 lg:gap-8">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
             {categories.map((category) => (
               <Link href={`/shop?category=${category.slug}`} key={category.id} className="group relative overflow-hidden rounded-lg shadow-lg">
                 <Image
