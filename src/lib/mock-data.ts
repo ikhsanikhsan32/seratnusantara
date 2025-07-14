@@ -27,14 +27,14 @@ export type Product = {
 };
 
 export const products: Product[] = [
-  { id: '1', name: 'Classic Leather Jacket', price: 149.99, category: 'Apparel', rating: 4.5, imageUrl: 'https://placehold.co/600x600.png', description: 'A timeless leather jacket for any occasion.', availability: 'In Stock', reviews: 120, aiHint: 'leather jacket', vendorId: 'vendor-2' },
-  { id: '2', name: 'Wireless Noise-Cancelling Headphones', price: 249.99, category: 'Electronics', rating: 4.8, imageUrl: 'https://placehold.co/600x600.png', description: 'Immerse yourself in sound with these premium headphones.', availability: 'In Stock', reviews: 250, aiHint: 'headphones', vendorId: 'vendor-1' },
+  { id: '1', name: 'Classic Leather Jacket', price: 149.99, category: 'Clothing', rating: 4.5, imageUrl: 'https://placehold.co/600x600.png', description: 'A timeless leather jacket for any occasion.', availability: 'In Stock', reviews: 120, aiHint: 'leather jacket', vendorId: 'vendor-2' },
+  { id: '2', name: 'Wireless Noise-Cancelling Headphones', price: 249.99, category: 'Accessories', rating: 4.8, imageUrl: 'https://placehold.co/600x600.png', description: 'Immerse yourself in sound with these premium headphones.', availability: 'In Stock', reviews: 250, aiHint: 'headphones', vendorId: 'vendor-1' },
   { id: '3', name: 'Modern Minimalist Watch', price: 99.99, category: 'Accessories', rating: 4.2, imageUrl: 'https://placehold.co/600x600.png', description: 'Elegant and simple, this watch complements any outfit.', availability: 'In Stock', reviews: 85, aiHint: 'watch', vendorId: 'vendor-2' },
-  { id: '4', name: 'Ergonomic Office Chair', price: 349.99, category: 'Home', rating: 4.9, imageUrl: 'https://placehold.co/600x600.png', description: 'Stay comfortable and productive with our ergonomic chair.', availability: 'In Stock', reviews: 300, aiHint: 'office chair', vendorId: 'vendor-3' },
-  { id: '5', name: 'Organic Cotton T-Shirt', price: 29.99, category: 'Apparel', rating: 4.6, imageUrl: 'https://placehold.co/600x600.png', description: 'Soft, breathable, and sustainably made.', availability: 'In Stock', reviews: 150, aiHint: 'tshirt', vendorId: 'vendor-2' },
-  { id: '6', name: 'Smart Home Hub', price: 129.99, category: 'Electronics', rating: 4.4, imageUrl: 'https://placehold.co/600x600.png', description: 'Control your smart devices with ease.', availability: 'Out of Stock', reviews: 95, aiHint: 'smart home', vendorId: 'vendor-1' },
-  { id: '7', name: 'Organic Granola', price: 9.99, category: 'Food', rating: 4.7, imageUrl: 'https://placehold.co/600x600.png', description: 'Healthy and delicious granola to start your day.', availability: 'In Stock', reviews: 180, aiHint: 'granola cereal', vendorId: 'vendor-4' },
-  { id: '8', name: 'Handcrafted Wooden Coffee Table', price: 299.99, category: 'Home', rating: 4.7, imageUrl: 'https://placehold.co/600x600.png', description: 'A beautiful centerpiece for your living room.', availability: 'In Stock', reviews: 110, aiHint: 'coffee table', vendorId: 'vendor-3' },
+  { id: '4', name: 'Ergonomic Office Chair', price: 349.99, category: 'Home decor', rating: 4.9, imageUrl: 'https://placehold.co/600x600.png', description: 'Stay comfortable and productive with our ergonomic chair.', availability: 'In Stock', reviews: 300, aiHint: 'office chair', vendorId: 'vendor-3' },
+  { id: '5', name: 'Organic Cotton T-Shirt', price: 29.99, category: 'Clothing', rating: 4.6, imageUrl: 'https://placehold.co/600x600.png', description: 'Soft, breathable, and sustainably made.', availability: 'In Stock', reviews: 150, aiHint: 'tshirt', vendorId: 'vendor-2' },
+  { id: '6', name: 'Smart Home Hub', price: 129.99, category: 'Home decor', rating: 4.4, imageUrl: 'https://placehold.co/600x600.png', description: 'Control your smart devices with ease.', availability: 'Out of Stock', reviews: 95, aiHint: 'smart home', vendorId: 'vendor-1' },
+  { id: '7', name: 'Leather Tote Bag', price: 79.99, category: 'Bags', rating: 4.7, imageUrl: 'https://placehold.co/600x600.png', description: 'A stylish and spacious bag for your essentials.', availability: 'In Stock', reviews: 180, aiHint: 'leather bag', vendorId: 'vendor-4' },
+  { id: '8', name: 'Handcrafted Wooden Coffee Table', price: 299.99, category: 'Home decor', rating: 4.7, imageUrl: 'https://placehold.co/600x600.png', description: 'A beautiful centerpiece for your living room.', availability: 'In Stock', reviews: 110, aiHint: 'coffee table', vendorId: 'vendor-3' },
 ];
 
 export type Category = {
@@ -46,11 +46,12 @@ export type Category = {
 };
 
 export const categories: Category[] = [
-  { id: '1', name: 'Apparel', slug: 'apparel', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'clothing rack' },
-  { id: '2', name: 'Electronics', slug: 'electronics', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'gadgets' },
-  { id: '3', name: 'Accessories', slug: 'accessories', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'watches belts' },
-  { id: '4', name: 'Home Goods', slug: 'home', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'home decor' },
-  { id: '5', name: 'Organic Food', slug: 'food', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'fresh produce' },
+  { id: '1', name: 'Clothing', slug: 'clothing', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'clothing rack' },
+  { id: '2', name: 'Accessories', slug: 'accessories', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'watches belts' },
+  { id: '3', name: 'Footwear', slug: 'footwear', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'sneakers shoes' },
+  { id: '4', name: 'Bags', slug: 'bags', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'handbags' },
+  { id: '5', name: 'Jewelry', slug: 'jewelry', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'necklaces rings' },
+  { id: '6', name: 'Home decor', slug: 'home-decor', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'home decor' },
 ];
 
 export type BlogPost = {
