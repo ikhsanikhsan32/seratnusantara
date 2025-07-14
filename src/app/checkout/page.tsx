@@ -1,12 +1,16 @@
+
+"use client";
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { CreditCard, Landmark, Wallet } from 'lucide-react';
+import { CreditCard, Landmark, Wallet, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
-import { products } from '@/lib/mock-data';
+import Link from 'next/link';
+import { useStore } from '@/context/store-context';
 
 function formatPrice(price: number) {
     return new Intl.NumberFormat('id-ID', {
@@ -17,10 +21,19 @@ function formatPrice(price: number) {
 }
 
 export default function CheckoutPage() {
-    const cartItems = products.slice(0, 2).map(p => ({ ...p, quantity: 1 }));
-    const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const shipping = 50000;
+    const { cart, isLoaded } = useStore();
+    
+    const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    const shipping = subtotal > 0 ? 50000 : 0;
     const total = subtotal + shipping;
+
+    if (!isLoaded) {
+        return (
+            <div className="container mx-auto px-4 py-8 text-center">
+                <p>Loading checkout...</p>
+            </div>
+        );
+    }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -28,6 +41,18 @@ export default function CheckoutPage() {
         <h1 className="font-headline text-4xl font-bold">Checkout</h1>
       </header>
       
+      {cart.length === 0 ? (
+        <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-border p-12 text-center">
+            <ShoppingCart className="mx-auto h-12 w-12 text-muted-foreground" />
+            <h2 className="mt-6 font-headline text-xl font-semibold">Your cart is empty</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+                You can't proceed to checkout with an empty cart.
+            </p>
+            <Button asChild className="mt-6">
+                <Link href="/shop">Start Shopping</Link>
+            </Button>
+        </div>
+      ) : (
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <div className="lg:col-span-2">
             <div className="space-y-8">
@@ -120,13 +145,14 @@ export default function CheckoutPage() {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
-                        {cartItems.map(item => (
+                        {cart.map(item => (
                             <div key={item.id} className="flex items-center justify-between">
                                 <div className="flex items-center gap-4">
                                     <Image src={item.imageUrl} alt={item.name} width={64} height={64} className="rounded-md" data-ai-hint={item.aiHint} />
                                     <div>
                                         <p className="font-semibold">{item.name}</p>
                                         <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
+                                        {item.variantName && <p className="text-sm text-muted-foreground">({item.variantName})</p>}
                                     </div>
                                 </div>
                                 <p>{formatPrice(item.price * item.quantity)}</p>
@@ -150,15 +176,14 @@ export default function CheckoutPage() {
                         </div>
                     </div>
                 </CardContent>
-                <CardContent>
+                <CardFooter>
                     <Button size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90">Place Order</Button>
-                </CardContent>
+                </CardFooter>
             </Card>
         </div>
 
       </div>
+      )}
     </div>
   );
 }
-
-    
