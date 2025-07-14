@@ -18,11 +18,19 @@ function formatPrice(price: number) {
 }
 
 export default function CartPage() {
-  const { cart, updateQuantity, removeFromCart } = useStore();
+  const { cart, updateQuantity, removeFromCart, isLoaded } = useStore();
   
   const subtotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const shipping = subtotal > 0 ? 50000 : 0;
   const total = subtotal + shipping;
+  
+  if (!isLoaded) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <p>Loading cart...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

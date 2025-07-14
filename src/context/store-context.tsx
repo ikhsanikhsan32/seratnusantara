@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useReducer, ReactNode, useEffect, useState } from 'react';
 import type { Product } from '@/lib/mock-data';
 
 export interface CartItem extends Product {
@@ -72,6 +72,7 @@ const storeReducer = (state: StoreState, action: StoreAction): StoreState => {
 };
 
 type StoreContextType = {
+  isLoaded: boolean;
   cart: CartItem[];
   wishlist: Product[];
   addToCart: (item: CartItem) => void;
@@ -85,6 +86,7 @@ const StoreContext = createContext<StoreContextType | undefined>(undefined);
 
 export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(storeReducer, initialState);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     try {
@@ -94,16 +96,20 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
       }
     } catch (error) {
         console.error("Could not load state from local storage", error)
+    } finally {
+        setIsLoaded(true);
     }
   }, []);
 
   useEffect(() => {
-    try {
-        localStorage.setItem('storeState', JSON.stringify(state));
-    } catch(error) {
-        console.error("Could not save state to local storage", error)
+    if (isLoaded) {
+        try {
+            localStorage.setItem('storeState', JSON.stringify(state));
+        } catch(error) {
+            console.error("Could not save state to local storage", error)
+        }
     }
-  }, [state]);
+  }, [state, isLoaded]);
 
   const addToCart = (item: CartItem) => dispatch({ type: 'ADD_TO_CART', payload: item });
   const removeFromCart = (id: string) => dispatch({ type: 'REMOVE_FROM_CART', payload: { id } });
@@ -112,7 +118,7 @@ export const StoreProvider = ({ children }: { children: ReactNode }) => {
   const isInWishlist = (productId: string) => state.wishlist.some(item => item.id === productId);
 
   return (
-    <StoreContext.Provider value={{ cart: state.cart, wishlist: state.wishlist, addToCart, removeFromCart, updateQuantity, addToWishlist, isInWishlist }}>
+    <StoreContext.Provider value={{ isLoaded, cart: state.cart, wishlist: state.wishlist, addToCart, removeFromCart, updateQuantity, addToWishlist, isInWishlist }}>
       {children}
     </StoreContext.Provider>
   );

@@ -7,7 +7,15 @@ import { HeartCrack } from 'lucide-react';
 import { useStore } from '@/context/store-context';
 
 export default function WishlistPage() {
-  const { wishlist } = useStore();
+  const { wishlist, isLoaded } = useStore();
+
+  if (!isLoaded) {
+    return (
+      <div className="container mx-auto px-4 py-8 text-center">
+        <p>Loading wishlist...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
