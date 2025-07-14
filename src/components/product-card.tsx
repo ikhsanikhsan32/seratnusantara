@@ -1,15 +1,17 @@
+
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, ShoppingCart, Star, Store, CheckCircle } from "lucide-react";
+import { Heart, ShoppingCart, Star, Store } from "lucide-react";
 import type { Product } from "@/lib/mock-data";
 import { vendors } from "@/lib/mock-data";
 import { Badge } from "./ui/badge";
 import { useStore } from "@/context/store-context";
 import { useToast } from "@/hooks/use-toast";
+import { useEffect, useState } from "react";
 
 interface ProductCardProps {
   product: Product;
@@ -24,9 +26,17 @@ function formatPrice(price: number) {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { addToCart, addToWishlist, isInWishlist } = useStore();
+  const { addToCart, addToWishlist, isInWishlist, isLoaded } = useStore();
   const { toast } = useToast();
   const vendor = vendors.find(v => v.id === product.vendorId);
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
+  useEffect(() => {
+    if (isLoaded) {
+      setIsWishlisted(isInWishlist(product.id));
+    }
+  }, [isLoaded, isInWishlist, product.id]);
+
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -47,13 +57,13 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleAddToWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
     addToWishlist(product);
+    // The useEffect will update the isWishlisted state reactively
     toast({
-      title: isInWishlist(product.id) ? "Removed from Wishlist" : "Added to Wishlist",
-      description: `${product.name} has been ${isInWishlist(product.id) ? 'removed from' : 'added to'} your wishlist.`,
+      title: !isWishlisted ? "Added to Wishlist" : "Removed from Wishlist",
+      description: `${product.name} has been ${!isWishlisted ? 'added to' : 'removed from'} your wishlist.`,
     });
   };
 
-  const isWishlisted = isInWishlist(product.id);
 
   return (
     <Card className="group flex flex-col overflow-hidden rounded-lg shadow-sm transition-shadow hover:shadow-md">
@@ -75,6 +85,7 @@ export function ProductCard({ product }: ProductCardProps) {
             className="absolute right-3 top-3 h-8 w-8 rounded-full bg-white/80 backdrop-blur-sm"
             aria-label="Add to wishlist"
             onClick={handleAddToWishlist}
+            disabled={!isLoaded}
           >
             <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
           </Button>

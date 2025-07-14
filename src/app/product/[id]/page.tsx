@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -22,6 +23,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useStore, CartItem } from '@/context/store-context';
 import { useToast } from '@/hooks/use-toast';
+import Link from 'next/link';
 
 function formatPrice(price: number) {
     return new Intl.NumberFormat('id-ID', {
@@ -32,7 +34,7 @@ function formatPrice(price: number) {
 }
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
-  const { addToCart, addToWishlist, isInWishlist } = useStore();
+  const { addToCart, addToWishlist, isInWishlist, isLoaded } = useStore();
   const { toast } = useToast();
 
   const product = products.find((p) => p.id === params.id);
@@ -47,6 +49,15 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     });
     return initialOptions;
   });
+
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
+  useEffect(() => {
+    if (isLoaded && product) {
+      setIsWishlisted(isInWishlist(product.id));
+    }
+  }, [isLoaded, isInWishlist, product]);
+
 
   const selectedVariant = useMemo(() => {
     if (product?.variants) {
@@ -100,8 +111,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   const handleAddToWishlist = () => {
     addToWishlist(product);
     toast({
-      title: isInWishlist(product.id) ? "Removed from Wishlist" : "Added to Wishlist",
-      description: `${product.name} has been ${isInWishlist(product.id) ? 'removed from' : 'added to'} your wishlist.`,
+      title: !isWishlisted ? "Added to Wishlist" : "Removed from Wishlist",
+      description: `${product.name} has been ${!isWishlisted ? 'added to' : 'removed from'} your wishlist.`,
     });
   };
 
@@ -229,13 +240,13 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                <Button size="lg" className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90" onClick={handleAddToCart}>
                 <ShoppingCart className="mr-2 h-5 w-5" /> Add to Cart
               </Button>
-              <Button size="lg" variant="outline" className="flex-1" onClick={handleAddToWishlist}>
-                 {isInWishlist(product.id) ? (
+              <Button size="lg" variant="outline" className="flex-1" onClick={handleAddToWishlist} disabled={!isLoaded}>
+                 {isWishlisted ? (
                     <CheckCircle className="mr-2 h-5 w-5 text-green-500" />
                   ) : (
                     <Heart className="mr-2 h-5 w-5" />
                   )}
-                  {isInWishlist(product.id) ? 'In Wishlist' : 'Add to Wishlist'}
+                  {isWishlisted ? 'In Wishlist' : 'Add to Wishlist'}
               </Button>
             </div>
           </div>
