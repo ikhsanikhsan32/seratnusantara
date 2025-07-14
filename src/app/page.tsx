@@ -6,28 +6,104 @@ import { ProductCard } from '@/components/product-card';
 import { products, categories } from '@/lib/mock-data';
 import NewsletterPopup from '@/components/newsletter-popup';
 import { ArrowRight, Mail } from 'lucide-react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
 
 export default function Home() {
   const featuredProducts = products.slice(0, 4);
+
+  const heroSlides = [
+    {
+      title: 'Style for Every Story',
+      description: 'Discover our new collection of curated items, designed to fit your life.',
+      imageUrl: 'https://placehold.co/1600x900.png',
+      aiHint: 'fashion store',
+      buttonText: 'Shop Now',
+      buttonLink: '/shop',
+    },
+    {
+      title: 'Latest in Electronics',
+      description: 'Explore cutting-edge gadgets that redefine your world.',
+      imageUrl: 'https://placehold.co/1600x900.png',
+      aiHint: 'modern gadgets',
+      buttonText: 'Explore Gadgets',
+      buttonLink: '/shop?category=electronics',
+    },
+    {
+      title: 'Cozy Home Essentials',
+      description: 'Transform your space with our unique home decor items.',
+      imageUrl: 'https://placehold.co/1600x900.png',
+      aiHint: 'living room decor',
+      buttonText: 'Decorate Your Home',
+      buttonLink: '/shop?category=home',
+    },
+  ];
 
   return (
     <div className="flex flex-col">
       <NewsletterPopup />
 
       {/* Hero Banner Section */}
-      <section className="relative h-[60vh] w-full bg-cover bg-center" style={{backgroundImage: "url('https://placehold.co/1600x900.png')"}} data-ai-hint="fashion store">
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white">
-          <h1 className="font-headline text-4xl font-bold md:text-6xl">
-            Style for Every Story
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg">
-            Discover our new collection of curated items, designed to fit your life.
-          </p>
-          <Button asChild className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90" size="lg">
-            <Link href="/shop">Shop Now <ArrowRight className="ml-2" /></Link>
-          </Button>
+      <section className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden">
+        <div className="absolute inset-0 z-20 hidden md:flex items-center justify-center pointer-events-none">
+           <div className="relative w-1/4 h-1/2 -translate-x-[150%]">
+             <div className="absolute inset-0 animate-float">
+                <Image 
+                    src="https://placehold.co/400x500.png" 
+                    alt="Floating promotion" 
+                    width={400}
+                    height={500}
+                    className="object-contain"
+                    data-ai-hint="fashion accessory"
+                />
+             </div>
+           </div>
         </div>
+        <Carousel
+          opts={{
+            align: 'start',
+            loop: true,
+          }}
+          className="w-full h-full"
+        >
+          <CarouselContent>
+            {heroSlides.map((slide, index) => (
+              <CarouselItem key={index}>
+                <div
+                  className="relative h-[70vh] md:h-[80vh] w-full bg-cover bg-center"
+                  style={{ backgroundImage: `url('${slide.imageUrl}')` }}
+                  data-ai-hint={slide.aiHint}
+                >
+                  <div className="absolute inset-0 bg-black/50" />
+                  <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white p-4">
+                    <h1 className="font-headline text-4xl font-bold md:text-6xl">
+                      {slide.title}
+                    </h1>
+                    <p className="mt-4 max-w-2xl text-lg">
+                      {slide.description}
+                    </p>
+                    <Button
+                      asChild
+                      className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90"
+                      size="lg"
+                    >
+                      <Link href={slide.buttonLink}>
+                        {slide.buttonText} <ArrowRight className="ml-2" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="absolute left-4 z-10" />
+          <CarouselNext className="absolute right-4 z-10" />
+        </Carousel>
       </section>
 
       {/* Featured Products Section */}
