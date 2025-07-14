@@ -1,11 +1,13 @@
+"use client";
+
 import { ProductCard } from '@/components/product-card';
-import { products } from '@/lib/mock-data';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { HeartCrack } from 'lucide-react';
+import { useStore } from '@/context/store-context';
 
 export default function WishlistPage() {
-  const wishlistItems = products.slice(2, 6);
+  const { wishlist } = useStore();
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -16,9 +18,9 @@ export default function WishlistPage() {
         </p>
       </header>
 
-      {wishlistItems.length > 0 ? (
+      {wishlist.length > 0 ? (
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {wishlistItems.map((product) => (
+          {wishlist.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

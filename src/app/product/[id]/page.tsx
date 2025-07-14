@@ -13,13 +13,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { Star, Heart, ShoppingCart, Minus, Plus } from 'lucide-react';
+import { Star, Heart, ShoppingCart, Minus, Plus, CheckCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { ProductCard } from '@/components/product-card';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useStore, CartItem } from '@/context/store-context';
+import { useToast } from '@/hooks/use-toast';
 
 function formatPrice(price: number) {
     return new Intl.NumberFormat('id-ID', {
@@ -30,8 +32,11 @@ function formatPrice(price: number) {
 }
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
-  const product = products.find((p) => p.id === params.id);
+  const { addToCart, addToWishlist, isInWishlist } = useStore();
+  const { toast } = useToast();
 
+  const product = products.find((p) => p.id === params.id);
+  const [quantity, setQuantity] = useState(1);
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
     product?.variants?.options[0]?.id ?? null
   );
@@ -43,13 +48,22 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     return initialOptions;
   });
 
-  const price = useMemo(() => {
+  const selectedVariant = useMemo(() => {
     if (product?.variants) {
-      const variant = product.variants.options.find(v => v.id === selectedVariantId);
-      return variant ? variant.price : product.price;
+      return product.variants.options.find(v => v.id === selectedVariantId);
     }
-    return product?.price ?? 0;
+    return null;
   }, [product, selectedVariantId]);
+
+  const price = useMemo(() => {
+    return selectedVariant ? selectedVariant.price : product?.price ?? 0;
+  }, [product, selectedVariant]);
+
+  useEffect(() => {
+    if (product?.variants && !selectedVariantId) {
+      setSelectedVariantId(product.variants.options[0].id);
+    }
+  }, [product]);
 
 
   if (!product) {
@@ -58,6 +72,37 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
   const handleOptionChange = (optionName: string, value: string) => {
     setSelectedOptions(prev => ({ ...prev, [optionName]: value }));
+  };
+
+  const handleAddToCart = () => {
+    const itemToAdd: CartItem = {
+      ...product,
+      id: selectedVariant ? `${product.id}_${selectedVariant.id}` : product.id,
+      productId: product.id,
+      price: price,
+      quantity: quantity,
+      variantName: selectedVariant?.name,
+    };
+    addToCart(itemToAdd);
+    toast({
+      title: "Added to Cart",
+      description: `${product.name} ${selectedVariant ? `(${selectedVariant.name})` : ''} has been added to your cart.`,
+      action: (
+        <Link href="/cart">
+          <Button variant="outline" size="sm">
+            View Cart
+          </Button>
+        </Link>
+      ),
+    });
+  };
+
+  const handleAddToWishlist = () => {
+    addToWishlist(product);
+    toast({
+      title: isInWishlist(product.id) ? "Removed from Wishlist" : "Added to Wishlist",
+      description: `${product.name} has been ${isInWishlist(product.id) ? 'removed from' : 'added to'} your wishlist.`,
+    });
   };
 
   const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
@@ -171,21 +216,26 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <div className="flex items-center gap-2">
               <span className="font-semibold">Quantity:</span>
               <div className="flex items-center rounded-md border">
-                <Button variant="ghost" size="icon" className="h-9 w-9">
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQuantity(q => Math.max(1, q - 1))}>
                   <Minus className="h-4 w-4" />
                 </Button>
-                <span className="w-10 text-center font-bold">1</span>
-                <Button variant="ghost" size="icon" className="h-9 w-9">
+                <span className="w-10 text-center font-bold">{quantity}</span>
+                <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setQuantity(q => q + 1)}>
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
             </div>
             <div className="flex flex-grow gap-4">
-               <Button size="lg" className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90">
+               <Button size="lg" className="flex-1 bg-accent text-accent-foreground hover:bg-accent/90" onClick={handleAddToCart}>
                 <ShoppingCart className="mr-2 h-5 w-5" /> Add to Cart
               </Button>
-              <Button size="lg" variant="outline" className="flex-1">
-                <Heart className="mr-2 h-5 w-5" /> Add to Wishlist
+              <Button size="lg" variant="outline" className="flex-1" onClick={handleAddToWishlist}>
+                 {isInWishlist(product.id) ? (
+                    <CheckCircle className="mr-2 h-5 w-5 text-green-500" />
+                  ) : (
+                    <Heart className="mr-2 h-5 w-5" />
+                  )}
+                  {isInWishlist(product.id) ? 'In Wishlist' : 'Add to Wishlist'}
               </Button>
             </div>
           </div>

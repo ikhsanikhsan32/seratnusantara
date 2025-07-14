@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
+import { useStore } from "@/context/store-context";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -25,6 +26,9 @@ const navLinks = [
 
 export function Header() {
   const pathname = usePathname();
+  const { cart, wishlist } = useStore();
+
+  const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -64,13 +68,23 @@ export function Header() {
           </div>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon" asChild>
-              <Link href="/wishlist">
+              <Link href="/wishlist" className="relative">
+                {wishlist.length > 0 && (
+                  <div className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                    {wishlist.length}
+                  </div>
+                )}
                 <Heart className="h-5 w-5" />
                 <span className="sr-only">Wishlist</span>
               </Link>
             </Button>
             <Button variant="ghost" size="icon" asChild>
-              <Link href="/cart">
+              <Link href="/cart" className="relative">
+                 {totalCartItems > 0 && (
+                  <div className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                    {totalCartItems}
+                  </div>
+                )}
                 <ShoppingCart className="h-5 w-5" />
                 <span className="sr-only">Cart</span>
               </Link>
