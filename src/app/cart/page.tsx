@@ -7,10 +7,18 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Minus, Plus, Trash2 } from 'lucide-react';
 import { products } from '@/lib/mock-data';
 
+function formatPrice(price: number) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  }).format(price);
+}
+
 export default function CartPage() {
   const cartItems = products.slice(0, 3).map(p => ({ ...p, quantity: 1 }));
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const shipping = 5.00;
+  const shipping = 50000;
   const total = subtotal + shipping;
 
   return (
@@ -47,7 +55,7 @@ export default function CartPage() {
                           </div>
                         </div>
                       </TableCell>
-                      <TableCell>${item.price.toFixed(2)}</TableCell>
+                      <TableCell>{formatPrice(item.price)}</TableCell>
                       <TableCell>
                         <div className="flex items-center rounded-md border w-fit">
                           <Button variant="ghost" size="icon" className="h-8 w-8"><Minus className="h-4 w-4" /></Button>
@@ -55,7 +63,7 @@ export default function CartPage() {
                           <Button variant="ghost" size="icon" className="h-8 w-8"><Plus className="h-4 w-4" /></Button>
                         </div>
                       </TableCell>
-                      <TableCell>${(item.price * item.quantity).toFixed(2)}</TableCell>
+                      <TableCell>{formatPrice(item.price * item.quantity)}</TableCell>
                       <TableCell>
                         <Button variant="ghost" size="icon"><Trash2 className="h-4 w-4 text-muted-foreground" /></Button>
                       </TableCell>
@@ -76,15 +84,15 @@ export default function CartPage() {
             <CardContent className="space-y-4">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span>{formatPrice(subtotal)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
-                <span>${shipping.toFixed(2)}</span>
+                <span>{formatPrice(shipping)}</span>
               </div>
               <div className="flex justify-between font-bold">
                 <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span>{formatPrice(total)}</span>
               </div>
             </CardContent>
             <CardFooter className="flex-col gap-4">
@@ -101,3 +109,5 @@ export default function CartPage() {
     </div>
   );
 }
+
+    

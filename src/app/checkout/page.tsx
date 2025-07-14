@@ -8,10 +8,18 @@ import { CreditCard, Landmark, Wallet } from 'lucide-react';
 import Image from 'next/image';
 import { products } from '@/lib/mock-data';
 
+function formatPrice(price: number) {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+    }).format(price);
+}
+
 export default function CheckoutPage() {
     const cartItems = products.slice(0, 2).map(p => ({ ...p, quantity: 1 }));
     const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-    const shipping = 5.00;
+    const shipping = 50000;
     const total = subtotal + shipping;
 
   return (
@@ -121,7 +129,7 @@ export default function CheckoutPage() {
                                         <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
                                     </div>
                                 </div>
-                                <p>${(item.price * item.quantity).toFixed(2)}</p>
+                                <p>{formatPrice(item.price * item.quantity)}</p>
                             </div>
                         ))}
                     </div>
@@ -129,16 +137,16 @@ export default function CheckoutPage() {
                     <div className="space-y-2">
                         <div className="flex justify-between">
                             <span className="text-muted-foreground">Subtotal</span>
-                            <span>${subtotal.toFixed(2)}</span>
+                            <span>{formatPrice(subtotal)}</span>
                         </div>
                         <div className="flex justify-between">
                             <span className="text-muted-foreground">Shipping</span>
-                            <span>${shipping.toFixed(2)}</span>
+                            <span>{formatPrice(shipping)}</span>
                         </div>
                         <Separator className="my-2" />
                          <div className="flex justify-between text-lg font-bold">
                             <span>Total</span>
-                            <span>${total.toFixed(2)}</span>
+                            <span>{formatPrice(total)}</span>
                         </div>
                     </div>
                 </CardContent>
@@ -152,3 +160,5 @@ export default function CheckoutPage() {
     </div>
   );
 }
+
+    

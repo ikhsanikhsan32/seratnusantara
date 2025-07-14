@@ -13,6 +13,14 @@ interface ProductCardProps {
   product: Product;
 }
 
+function formatPrice(price: number) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  }).format(price);
+}
+
 export function ProductCard({ product }: ProductCardProps) {
   const vendor = vendors.find(v => v.id === product.vendorId);
 
@@ -61,7 +69,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </Link>
           )}
           <div className="mt-4 flex flex-1 items-end justify-between">
-            <p className="text-lg font-bold text-primary">${product.price.toFixed(2)}</p>
+            <p className="text-lg font-bold text-primary">{formatPrice(product.price)}</p>
             <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
               <ShoppingCart className="mr-2 h-4 w-4" />
               Add to Cart
@@ -72,3 +80,5 @@ export function ProductCard({ product }: ProductCardProps) {
     </Card>
   );
 }
+
+    

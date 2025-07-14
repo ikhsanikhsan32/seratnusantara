@@ -8,6 +8,14 @@ import { BarChart, Edit, MoreHorizontal, Package, PlusCircle, Trash2 } from "luc
 import { vendors, products } from "@/lib/mock-data";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
+function formatPrice(price: number) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  }).format(price);
+}
+
 export default function VendorDashboardPage() {
   // We'll use the first vendor as a mock for the logged-in vendor
   const vendor = vendors[0];
@@ -68,7 +76,7 @@ export default function VendorDashboardPage() {
                           {product.availability}
                         </Badge>
                       </TableCell>
-                      <TableCell>${product.price.toFixed(2)}</TableCell>
+                      <TableCell>{formatPrice(product.price)}</TableCell>
                       <TableCell>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
@@ -102,10 +110,10 @@ export default function VendorDashboardPage() {
                <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-                  <span className="text-muted-foreground">$</span>
+                  <span className="text-muted-foreground">Rp</span>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">$45,231.89</div>
+                  <div className="text-2xl font-bold">Rp 45.231.890</div>
                   <p className="text-xs text-muted-foreground">+20.1% from last month</p>
                 </CardContent>
               </Card>
@@ -125,7 +133,7 @@ export default function VendorDashboardPage() {
                    <BarChart className="text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">$125.30</div>
+                  <div className="text-2xl font-bold">Rp 125.300</div>
                   <p className="text-xs text-muted-foreground">+2% from last month</p>
                 </CardContent>
               </Card>
@@ -158,3 +166,5 @@ export default function VendorDashboardPage() {
     </div>
   );
 }
+
+    
