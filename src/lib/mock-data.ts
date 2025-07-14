@@ -6,10 +6,10 @@ export type Vendor = {
 };
 
 export const vendors: Vendor[] = [
-  { id: 'vendor-1', name: 'ElectroGadgets Inc.', logoUrl: 'https://placehold.co/100x100.png', description: 'Cutting-edge electronics and gadgets for the modern world.' },
-  { id: 'vendor-2', name: 'UrbanThreads', logoUrl: 'https://placehold.co/100x100.png', description: 'Stylish and comfortable apparel for every occasion.' },
-  { id: 'vendor-3', name: 'CozyHome Creations', logoUrl: 'https://placehold.co/100x100.png', description: 'Beautifully crafted goods to make your house a home.' },
-  { id: 'vendor-4', name: 'PureHarvest Organics', logoUrl: 'https://placehold.co/100x100.png', description: 'Fresh, organic, and locally sourced food products.' },
+  { id: 'vendor-1', name: 'Lilu Embrace', logoUrl: 'https://placehold.co/100x100.png', description: 'Cutting-edge electronics and gadgets for the modern world.' },
+  { id: 'vendor-2', name: 'Green Fast Sawit', logoUrl: 'https://placehold.co/100x100.png', description: 'Stylish and comfortable apparel for every occasion.' },
+  { id: 'vendor-3', name: 'puka_id', logoUrl: 'https://placehold.co/100x100.png', description: 'Beautifully crafted goods to make your house a home.' },
+  { id: 'vendor-4', name: 'SUSBAG', logoUrl: 'https://placehold.co/100x100.png', description: 'Fresh, organic, and locally sourced food products.' },
 ];
 
 export type Product = {
