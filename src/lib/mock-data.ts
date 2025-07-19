@@ -46,10 +46,7 @@ export type Product = {
 
 export const products: Product[] = [
   { id: '2', name: 'Wireless Noise-Cancelling Headphones', price: 2499000, category: 'Accessories', rating: 4.8, imageUrl: 'https://placehold.co/600x600.png', description: 'Immerse yourself in sound with these premium headphones.', availability: 'In Stock', reviews: 250, aiHint: 'headphones', vendorId: 'vendor-1' },
-  { id: '4', name: 'Ergonomic Office Chair', price: 3499000, category: 'Home decor', rating: 4.9, imageUrl: 'https://placehold.co/600x600.png', description: 'Stay comfortable and productive with our ergonomic chair.', availability: 'In Stock', reviews: 300, aiHint: 'office chair', vendorId: 'vendor-3' },
-  { id: '6', name: 'Smart Home Hub', price: 1299000, category: 'Home decor', rating: 4.4, imageUrl: 'https://placehold.co/600x600.png', description: 'Control your smart devices with ease.', availability: 'Out of Stock', reviews: 95, aiHint: 'smart home', vendorId: 'vendor-1' },
   { id: '7', name: 'Leather Tote Bag', price: 799000, category: 'Bags', rating: 4.7, imageUrl: 'https://placehold.co/600x600.png', description: 'A stylish and spacious bag for your essentials.', availability: 'In Stock', reviews: 180, aiHint: 'leather bag', vendorId: 'vendor-4' },
-  { id: '8', name: 'Handcrafted Wooden Coffee Table', price: 2999000, category: 'Home decor', rating: 4.7, imageUrl: 'https://placehold.co/600x600.png', description: 'A beautiful centerpiece for your living room.', availability: 'In Stock', reviews: 110, aiHint: 'coffee table', vendorId: 'vendor-3' },
   // Green Fast Sawit Products
   {
     id: '9',
@@ -214,6 +211,26 @@ export const products: Product[] = [
       ],
     },
   },
+  // Puka ID products
+  {
+    id: '17',
+    name: 'PUKA Binar Tas Wanita Payet Lucu Shoulder and Sling Bag Selempang Handmade',
+    price: 340000,
+    category: 'Bags',
+    rating: 4.9,
+    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrls: [
+        'https://placehold.co/800x800.png', 
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+        'https://placehold.co/800x800.png',
+    ],
+    description: 'Tas puffy yang dihiasi sequins beading dengan tema Galaxy, Party, Garden, dan Animals adalah representasi kilau yang ada di dalam diri kita. Kombinasi tekstur bahan yang berbeda melambangkan perjalanan mencari jati diri—tidak selalu mulus, tetapi penuh warna dan makna. Yuk, jadikan Tas Binar teman setiamu dalam menjalani hari dalam merayakan makna dan keberkahan dalam hidup.',
+    availability: 'In Stock',
+    reviews: 88,
+    aiHint: 'sequin bag',
+    vendorId: 'vendor-3',
+  },
 ];
 
 export type Category = {
@@ -276,5 +293,3 @@ export const newsItems: NewsItem[] = [
     { id: '3', text: '✨ New collection just dropped! Check out the latest trends.', link: '/shop' },
     { id: '4', text: 'Join our loyalty program and earn points on every purchase.' },
 ];
-
-    
