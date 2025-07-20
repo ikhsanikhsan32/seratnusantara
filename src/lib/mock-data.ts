@@ -391,6 +391,29 @@ export const products: Product[] = [
       values: ['Pink', 'Putih', 'Kuning'],
     }],
   },
+  {
+    id: '26',
+    name: 'PUKA Tas Bucket Bag Neon Garden with Strap Bag Macrame',
+    price: 205000,
+    category: 'Bags',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/LXkwDpps/DSC08700.jpg',
+    imageUrls: [
+      'https://i.ibb.co/LXkwDpps/DSC08700.jpg',
+      'https://i.ibb.co/n88S7Kp7/DSC08674.jpg',
+      'https://i.ibb.co/jkcvG0Gr/DSC08633.jpg',
+    ],
+    description: 'Material: Bahan tas Kanvas sedang, bahan strap tas tali macrame\n\nUkuran:\npanjang 27 cm\ndiameter dasar 15 cm\npanjang tali 67 cm\n\nDESKRIPSI :\n\nTas playful yang cantik ini sangat cocok untuk menemani penampilan mu yang casual. Ukurannya yang pas untuk membawa kebutuhan sehari-hari mu seperti dompet, handphone, notebook, botol minum, dll. Illustrasinya khusus dibuat oleh Claudia, anak penyandang borderline yang hobinya menggambar keadaan sekitar dengan sangat menggemaskan. nEOn GArdeN adalah karya Claudia yang menggambarkan sebuah taman bunga yang ceria, terdapat berbagai jenis bunga, dedaunan, kebun jeruk, dan rerumputan yang gemas. Pelangi menghiasi taman menggoreskan rona yang indah.  selamat menikmati panorama di nEOn GArdeN. semoga membuat penampilanmu lebih ceria :D',
+    availability: 'In Stock',
+    reviews: 18,
+    aiHint: 'bucket bag',
+    vendorId: 'vendor-3',
+    options: [{
+      id: 'neon-garden-color',
+      name: 'Warna',
+      values: ['Night', 'Day'],
+    }],
+  },
 ];
 
 export type Category = {
