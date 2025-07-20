@@ -261,6 +261,23 @@ export const products: Product[] = [
       values: ['Pink', 'Purple', 'Grey'],
     }],
   },
+  {
+    id: '19',
+    name: 'PUKA Bross Payet Ocean Series Bentuk Terumbu Karang Mutiara Coral Reefs',
+    price: 95000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/ds2nYb55/DSC04024.jpg',
+    imageUrls: [
+      'https://i.ibb.co/ds2nYb55/DSC04024.jpg',
+      'https://i.ibb.co/GvT4kbPq/DSC04021.jpg'
+    ],
+    description: 'So just like the ocean, we hope you find the comfie in our newest collection✨\n\nBross yang dipayet dengan nuansa lautan warna-warni, datang dengan stok terbatas!\n\nCARA PERAWATAN : Cukup dilap tisue bagian payet jika terkena noda\n\nDISCLAIMER\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.',
+    availability: 'In Stock',
+    reviews: 52,
+    aiHint: 'beaded brooch',
+    vendorId: 'vendor-3'
+  },
 ];
 
 export type Category = {
