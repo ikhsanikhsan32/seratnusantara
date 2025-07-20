@@ -13,6 +13,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from '@/components/ui/carousel';
 import { Star, Heart, ShoppingCart, Minus, Plus, CheckCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
@@ -20,7 +21,6 @@ import { ProductCard } from '@/components/product-card';
 import { useState, useMemo, useEffect } from 'react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useStore, CartItem } from '@/context/store-context';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
@@ -36,19 +36,20 @@ function formatPrice(price: number) {
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const { addToCart, addToWishlist, isInWishlist, isLoaded } = useStore();
   const { toast } = useToast();
+  
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
   const product = products.find((p) => p.id === params.id);
   const [quantity, setQuantity] = useState(1);
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
     product?.variants?.options[0]?.id ?? null
   );
-  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(() => {
-    const initialOptions: Record<string, string> = {};
-    product?.options?.forEach(option => {
-      initialOptions[option.name] = option.values[0];
-    });
-    return initialOptions;
+  
+  const initialOptions: Record<string, string> = {};
+  product?.options?.forEach(option => {
+    initialOptions[option.name] = option.values[0];
   });
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(initialOptions);
 
   const [isWishlisted, setIsWishlisted] = useState(false);
 
@@ -74,7 +75,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     if (product?.variants && !selectedVariantId) {
       setSelectedVariantId(product.variants.options[0].id);
     }
-  }, [product]);
+  }, [product, selectedVariantId]);
 
 
   if (!product) {
@@ -82,22 +83,36 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   }
 
   const handleOptionChange = (optionName: string, value: string) => {
-    setSelectedOptions(prev => ({ ...prev, [optionName]: value }));
+    const newSelectedOptions = { ...selectedOptions, [optionName]: value };
+    setSelectedOptions(newSelectedOptions);
+
+    if (optionName === 'Warna' && carouselApi) {
+        const colorMap: Record<string, number> = {
+            'Hitam': 1,
+            'Pink': 2,
+            'Putih': 3,
+        };
+        const slideIndex = colorMap[value];
+        if (slideIndex !== undefined) {
+            carouselApi.scrollTo(slideIndex, false);
+        }
+    }
   };
 
   const handleAddToCart = () => {
+    const optionText = Object.entries(selectedOptions).map(([key, value]) => `${key}: ${value}`).join(', ');
     const itemToAdd: CartItem = {
       ...product,
       id: selectedVariant ? `${product.id}_${selectedVariant.id}` : product.id,
       productId: product.id,
       price: price,
       quantity: quantity,
-      variantName: selectedVariant?.name,
+      variantName: selectedVariant?.name ? `${selectedVariant.name}${optionText ? ' ('+optionText+')' : ''}` : optionText,
     };
     addToCart(itemToAdd);
     toast({
       title: "Added to Cart",
-      description: `${product.name} ${selectedVariant ? `(${selectedVariant.name})` : ''} has been added to your cart.`,
+      description: `${product.name} ${itemToAdd.variantName ? `(${itemToAdd.variantName})` : ''} has been added to your cart.`,
       action: (
         <Link href="/cart">
           <Button variant="outline" size="sm">
@@ -110,9 +125,11 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
   const handleAddToWishlist = () => {
     addToWishlist(product);
+    const inWishlist = isInWishlist(product.id);
+    setIsWishlisted(!inWishlist);
     toast({
-      title: !isWishlisted ? "Added to Wishlist" : "Removed from Wishlist",
-      description: `${product.name} has been ${!isWishlisted ? 'added to' : 'removed from'} your wishlist.`,
+      title: !inWishlist ? "Added to Wishlist" : "Removed from Wishlist",
+      description: `${product.name} has been ${!inWishlist ? 'added to' : 'removed from'} your wishlist.`,
     });
   };
 
@@ -124,7 +141,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
         {/* Product Image Carousel */}
         <div>
-          <Carousel className="w-full">
+          <Carousel className="w-full" setApi={setCarouselApi}>
             <CarouselContent>
               {images.map((url, index) => (
                 <CarouselItem key={index}>
@@ -203,20 +220,24 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
             {product.options?.map(option => (
               <div key={option.id}>
-                <Label htmlFor={`select-${option.id}`} className="text-base font-semibold">{option.name}</Label>
-                <Select
+                <Label className="text-base font-semibold">{option.name}</Label>
+                 <RadioGroup 
                   value={selectedOptions[option.name]}
                   onValueChange={(value) => handleOptionChange(option.name, value)}
+                  className="mt-2 flex flex-wrap gap-2"
                 >
-                  <SelectTrigger id={`select-${option.id}`} className="mt-2">
-                    <SelectValue placeholder={`Select ${option.name}`} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {option.values.map(value => (
-                      <SelectItem key={value} value={value}>{value}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                  {option.values.map(value => (
+                    <div key={value}>
+                      <RadioGroupItem value={value} id={`${option.id}-${value}`} className="peer sr-only" />
+                      <Label
+                        htmlFor={`${option.id}-${value}`}
+                        className="flex items-center justify-center rounded-md border-2 border-muted bg-popover px-4 py-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                      >
+                        {value}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
               </div>
             ))}
           </div>

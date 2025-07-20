@@ -221,16 +221,21 @@ export const products: Product[] = [
     rating: 4.9,
     imageUrl: 'https://i.ibb.co/9HwBShKY/DSC09753.jpg',
     imageUrls: [
-        'https://i.ibb.co/9HwBShKY/DSC09753.jpg', 
+        'https://i.ibb.co/9HwBShKY/DSC09753.jpg',
         'https://iili.io/Fw8dIS4.md.jpg',
-        'https://placehold.co/800x800.png',
-        'https://placehold.co/800x800.png',
+        'https://i.ibb.co/ZpjQpfnR/DSC09773.jpg',
+        'https://i.ibb.co/WvjkHqjY/DSC09775.jpg',
     ],
     description: 'Tas puffy yang dihiasi sequins beading dengan tema Galaxy, Party, Garden, dan Animals adalah representasi kilau yang ada di dalam diri kita. Kombinasi tekstur bahan yang berbeda melambangkan perjalanan mencari jati diri—tidak selalu mulus, tetapi penuh warna dan makna. Yuk, jadikan Tas Binar teman setiamu dalam menjalani hari dalam merayakan makna dan keberkahan dalam hidup.',
     availability: 'In Stock',
     reviews: 88,
     aiHint: 'sequin bag',
     vendorId: 'vendor-3',
+    options: [{
+      id: 'puka-color',
+      name: 'Warna',
+      values: ['Hitam', 'Pink', 'Putih'],
+    }],
   },
 ];
 
