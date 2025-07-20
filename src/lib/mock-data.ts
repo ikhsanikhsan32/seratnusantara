@@ -295,6 +295,24 @@ export const products: Product[] = [
     aiHint: 'beaded earrings',
     vendorId: 'vendor-3'
   },
+  {
+    id: '21',
+    name: 'PUKA Kalung Starsea Manik-manik Ocean Series Colorful',
+    price: 110000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/27G1TVf2/DSC04045.jpg',
+    imageUrls: [
+      'https://i.ibb.co/27G1TVf2/DSC04045.jpg',
+      'https://i.ibb.co/skNfykD/DSC04046.jpg',
+      'https://i.ibb.co/MDf7Gbcv/DSC04050.jpg'
+    ],
+    description: "So just like the ocean, we hope you find the comfie in our newest collection✨\n\nKalung Starsea Manik-manik.\n\nMiliki Ocean Series: Coral Candy by Puka, berbagai aksesoris seperti Gelang, Anting, Bando, Tas, Bross, Kalung dan phone chain yang dibuat dengan beads cantik inspired by the ocean.\n\nCARA PERAWATAN : Cukup dilap tisue bagian payet jika terkena noda\n\nDISCLAIMER\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.",
+    availability: 'In Stock',
+    reviews: 29,
+    aiHint: 'beaded necklace',
+    vendorId: 'vendor-3'
+  },
 ];
 
 export type Category = {
