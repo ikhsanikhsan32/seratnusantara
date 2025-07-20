@@ -243,9 +243,9 @@ export const products: Product[] = [
     price: 120000,
     category: 'Accessories',
     rating: 4.9,
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://i.ibb.co/HLVCxBGL/DSC03997.jpg',
     imageUrls: [
-      'https://placehold.co/800x800.png',
+      'https://i.ibb.co/HLVCxBGL/DSC03997.jpg',
       'https://placehold.co/800x800.png',
       'https://placehold.co/800x800.png',
       'https://placehold.co/800x800.png',
