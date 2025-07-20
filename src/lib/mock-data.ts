@@ -349,6 +349,24 @@ export const products: Product[] = [
     aiHint: 'beaded bracelet',
     vendorId: 'vendor-3'
   },
+  {
+    id: '24',
+    name: 'PUKA Phone Strap Marina Mermaid Manik-manik Colorful Ocean Series Gantungan HP',
+    price: 85000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/dsh9wHcB/DSC04072.jpg',
+    imageUrls: [
+      'https://i.ibb.co/dsh9wHcB/DSC04072.jpg',
+      'https://i.ibb.co/9k1bx3PF/DSC04074.jpg',
+      'https://i.ibb.co/N2Z9KQQq/DSC04075.jpg'
+    ],
+    description: 'So just like the ocean, we hope you find the comfie in our newest collection✨\n\nPhone Strap lucu, imut dan warna-warni. Spesial buatan teman-teman inklusif.\n\nMiliki Ocean Series: Coral Candy by Puka, berbagai aksesoris seperti Gelang, Anting, Bando, Tas, Bross, Kalung dan phone chain yang dibuat dengan beads cantik inspired by the ocean.\n\nDISCLAIMER\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.',
+    availability: 'In Stock',
+    reviews: 21,
+    aiHint: 'phone strap',
+    vendorId: 'vendor-3'
+  },
 ];
 
 export type Category = {
