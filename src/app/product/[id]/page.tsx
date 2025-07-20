@@ -99,6 +99,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             'Grey': 3,
             'Night': 1,
             'Day': 2,
+            'Ocean': 0,
+            'Alice': 1,
+            'Playfull': 2,
+            'Lissi': 3,
         };
         const slideIndex = colorMap[value];
         if (slideIndex !== undefined) {

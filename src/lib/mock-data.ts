@@ -437,6 +437,30 @@ export const products: Product[] = [
       values: ['Pink', 'Green', 'Orange', 'Yellow'],
     }],
   },
+  {
+    id: '28',
+    name: 'PUKA Wonder Watch Jam Tangan Lucu Manik-manik Wanita handmade',
+    price: 225000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrls: [
+      'https://placehold.co/800x800.png',
+      'https://placehold.co/800x800.png',
+      'https://placehold.co/800x800.png',
+      'https://placehold.co/800x800.png',
+    ],
+    description: 'Tambahkan keceriaan pada setiap momen dengan Jam Tangan Manik-Manik ala Puka! Setiap jam tangan dirangkai dengan cermat oleh crafter spesial Puka, memadukan manik-manik berkualitas baik dalam berbagai bentuk dan warna yang menggemaskan.\n\nsize:\n-ukuran bisa di arrange/ diatur\n\nnote:\n•baiknya chat admin yahh untuk memberi tahu ukuran pergelangan tanggannya. \n•Sebelum kirim, team Puka akan mengirimkan preview melalui chat untuk memperlihatkan sambil dicek bahwa jam tangannya berfungsi dan dapat digunakan.',
+    availability: 'In Stock',
+    reviews: 15,
+    aiHint: 'beaded watch',
+    vendorId: 'vendor-3',
+    options: [{
+      id: 'wonder-watch-color',
+      name: 'Warna',
+      values: ['Ocean', 'Alice', 'Playfull', 'Lissi'],
+    }],
+  },
 ];
 
 export type Category = {
