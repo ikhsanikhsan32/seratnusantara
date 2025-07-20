@@ -414,6 +414,29 @@ export const products: Product[] = [
       values: ['Night', 'Day'],
     }],
   },
+  {
+    id: '27',
+    name: 'PUKA Joyful Bag 2-Way Slingbag Handbag',
+    price: 185000,
+    category: 'Bags',
+    rating: 5.0,
+    imageUrl: 'https://i.ibb.co/k2PbkBcf/DSC08707.jpg',
+    imageUrls: [
+      'https://i.ibb.co/k2PbkBcf/DSC08707.jpg',
+      'https://i.ibb.co/TxJjPdmb/DSC08709.jpg',
+      'https://i.ibb.co/Ng2wY1hy/DSC08712.jpg'
+    ],
+    description: 'SPESIFIKASI :\n- Material: Kanvas waterproof\n- Ukuran: 22 x 9 x 13 cm\nPanjang strap slingbag 100 cm dan dapat di atur\nCatatan: setiap tas memiliki aplikasi warna manik-manik yang berbeda (tidak akan selalu sesuai dengan yang difoto). Chat kami jika ingin melihat prduk yang dipilih, sebelum kirim akan kami fotokan terlebih dahulu.\n\nDESKRIPSI :\nJoyful bag merupakan 2 ways bag yang dapat digunakan sebagai handbag dan juga slingbag. Desain yang minimalis juga unik dengan gantungan manik manik lucu tersedia dalam 4 warna yaitu pink fushia, hijau, orange dan kuning. Joyful bag menambah kesan unik dan colorful pada outfitmu. Lengkapi penampilanmu dengan joyful bag',
+    availability: 'In Stock',
+    reviews: 10,
+    aiHint: 'colorful handbag',
+    vendorId: 'vendor-3',
+    options: [{
+      id: 'joyful-bag-color',
+      name: 'Warna',
+      values: ['Pink', 'Green', 'Orange', 'Yellow'],
+    }],
+  },
 ];
 
 export type Category = {
