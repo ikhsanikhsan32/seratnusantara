@@ -222,7 +222,7 @@ export const products: Product[] = [
     imageUrl: 'https://i.ibb.co/9HwBShKY/DSC09753.jpg',
     imageUrls: [
         'https://i.ibb.co/9HwBShKY/DSC09753.jpg', 
-        'https://placehold.co/800x800.png',
+        'https://iili.io/Fw8dIS4.md.jpg',
         'https://placehold.co/800x800.png',
         'https://placehold.co/800x800.png',
     ],
