@@ -218,7 +218,7 @@ export const products: Product[] = [
     price: 340000,
     category: 'Bags',
     rating: 4.9,
-    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrl: 'https://i.ibb.co/jyw1Sfy/Whats-App-Image-2024-07-26-at-13-22-26-1.jpg',
     imageUrls: [
         'https://placehold.co/800x800.png', 
         'https://placehold.co/800x800.png',
