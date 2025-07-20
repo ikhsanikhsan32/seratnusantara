@@ -87,27 +87,29 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   const handleOptionChange = useCallback((optionName: string, value: string) => {
     setSelectedOptions(prev => ({ ...prev, [optionName]: value }));
 
-    if (optionName === 'Warna' && carouselApi) {
-        const colorMap: Record<string, number> = {
-            'Hitam': 1, 'Pink': 1, 'Putih': 2, 'Kuning': 3,
-            'Purple': 2, 'Grey': 3,
-            'Night': 1, 'Day': 2,
-            'Ocean': 0, 'Alice': 1, 'Playfull': 2, 'Lissi': 3,
-            'Green': 1, 'Orange': 2, 'Yellow': 3,
-        };
-        const slideIndex = colorMap[value];
-        if (slideIndex !== undefined) {
-            carouselApi.scrollTo(slideIndex, false);
-        }
-    } else if (optionName === 'Ukuran' && carouselApi && product?.id === '9') { // Specific logic for Pot Sawit
-        const sizeMap: Record<string, number> = {
-            'Besar': 1,
-            'Sedang': 2,
-            'Kecil': 3
-        };
-        const slideIndex = sizeMap[value];
-        if (slideIndex !== undefined) {
-            carouselApi.scrollTo(slideIndex, false);
+    if (carouselApi) {
+        if (optionName === 'Warna') {
+            const colorMap: Record<string, number> = {
+                'Hitam': 1, 'Pink': 1, 'Putih': 2, 'Kuning': 3,
+                'Purple': 2, 'Grey': 3,
+                'Night': 1, 'Day': 2,
+                'Ocean': 0, 'Alice': 1, 'Playfull': 2, 'Lissi': 3,
+                'Green': 1, 'Orange': 2, 'Yellow': 3,
+            };
+            const slideIndex = colorMap[value];
+            if (slideIndex !== undefined) {
+                carouselApi.scrollTo(slideIndex, false);
+            }
+        } else if (optionName === 'Ukuran' && product?.id === '9') { // Specific logic for Pot Sawit
+            const sizeMap: Record<string, number> = {
+                'Besar': 1,
+                'Sedang': 2,
+                'Kecil': 3
+            };
+            const slideIndex = sizeMap[value];
+            if (slideIndex !== undefined) {
+                carouselApi.scrollTo(slideIndex, false);
+            }
         }
     }
   }, [carouselApi, product?.id]);
@@ -226,7 +228,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                       <RadioGroupItem value={variant.id} id={`variant-${variant.id}`} className="peer sr-only" />
                       <Label
                         htmlFor={`variant-${variant.id}`}
-                         onMouseEnter={() => { if(product.id === '9') handleOptionChange('Ukuran', variant.name) }}
+                        onMouseEnter={() => { if(product.id === '9') handleOptionChange('Ukuran', variant.name) }}
                         className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                       >
                         <span>{variant.name}</span>
