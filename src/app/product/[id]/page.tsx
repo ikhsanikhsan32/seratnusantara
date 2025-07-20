@@ -92,8 +92,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     if (optionName === 'Warna' && carouselApi) {
         const colorMap: Record<string, number> = {
             'Hitam': 1,
-            'Pink': product.id === '18' ? 1 : 2, // Bando starts at Pink on slide 2 (index 1)
-            'Putih': 3,
+            'Pink': 1,
+            'Putih': 2,
             'Purple': 2, 
             'Grey': 3,
         };
