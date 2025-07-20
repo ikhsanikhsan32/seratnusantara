@@ -18,7 +18,7 @@ import {
 import { Star, Heart, ShoppingCart, Minus, Plus, CheckCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { ProductCard } from '@/components/product-card';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useStore, CartItem } from '@/context/store-context';
@@ -33,25 +33,35 @@ function formatPrice(price: number) {
     }).format(price);
 }
 
+// Helper to get default options
+const getDefaultOptions = (product?: (typeof products)[0]): Record<string, string> => {
+  if (!product?.options) return {};
+  return product.options.reduce((acc, option) => {
+    acc[option.name] = option.values[0];
+    return acc;
+  }, {} as Record<string, string>);
+};
+
+
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const { addToCart, addToWishlist, isInWishlist, isLoaded } = useStore();
   const { toast } = useToast();
   
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
-  const product = products.find((p) => p.id === params.id);
-  const [quantity, setQuantity] = useState(1);
-  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
-    product?.variants?.options[0]?.id ?? null
-  );
-  
-  const initialOptions: Record<string, string> = {};
-  product?.options?.forEach(option => {
-    initialOptions[option.name] = option.values[0];
-  });
-  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(initialOptions);
+  const product = useMemo(() => products.find((p) => p.id === params.id), [params.id]);
 
+  const [quantity, setQuantity] = useState(1);
+  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const [isWishlisted, setIsWishlisted] = useState(false);
+
+  useEffect(() => {
+    if (product) {
+      setSelectedVariantId(product.variants?.options[0]?.id ?? null);
+      setSelectedOptions(getDefaultOptions(product));
+    }
+  }, [product]);
 
   useEffect(() => {
     if (isLoaded && product) {
@@ -69,49 +79,41 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
   const price = useMemo(() => {
     if (product?.variants?.options) {
-      return selectedVariant ? selectedVariant.price : product.variants.options[0].price;
+      return selectedVariant?.price ?? product.price ?? 0;
     }
     return product?.price ?? 0;
   }, [product, selectedVariant]);
-
-  useEffect(() => {
-    if (product?.variants && !selectedVariantId) {
-      setSelectedVariantId(product.variants.options[0].id);
-    }
-  }, [product, selectedVariantId]);
-
-
-  if (!product) {
-    notFound();
-  }
-
-  const handleOptionChange = (optionName: string, value: string) => {
-    const newSelectedOptions = { ...selectedOptions, [optionName]: value };
-    setSelectedOptions(newSelectedOptions);
+  
+  const handleOptionChange = useCallback((optionName: string, value: string) => {
+    setSelectedOptions(prev => ({ ...prev, [optionName]: value }));
 
     if (optionName === 'Warna' && carouselApi) {
         const colorMap: Record<string, number> = {
-            'Hitam': 1,
-            'Pink': 1,
-            'Putih': 2,
-            'Kuning': 3,
-            'Purple': 2, 
-            'Grey': 3,
-            'Night': 1,
-            'Day': 2,
-            'Ocean': 0,
-            'Alice': 1,
-            'Playfull': 2,
-            'Lissi': 3,
+            'Hitam': 1, 'Pink': 1, 'Putih': 2, 'Kuning': 3,
+            'Purple': 2, 'Grey': 3,
+            'Night': 1, 'Day': 2,
+            'Ocean': 0, 'Alice': 1, 'Playfull': 2, 'Lissi': 3,
+            'Green': 1, 'Orange': 2, 'Yellow': 3,
         };
         const slideIndex = colorMap[value];
         if (slideIndex !== undefined) {
             carouselApi.scrollTo(slideIndex, false);
         }
+    } else if (optionName === 'Ukuran' && carouselApi && product?.id === '9') { // Specific logic for Pot Sawit
+        const sizeMap: Record<string, number> = {
+            'Besar': 1,
+            'Sedang': 2,
+            'Kecil': 3
+        };
+        const slideIndex = sizeMap[value];
+        if (slideIndex !== undefined) {
+            carouselApi.scrollTo(slideIndex, false);
+        }
     }
-  };
+  }, [carouselApi, product?.id]);
 
   const handleAddToCart = () => {
+    if (!product) return;
     const optionText = Object.entries(selectedOptions).map(([key, value]) => `${key}: ${value}`).join(', ');
     const itemToAdd: CartItem = {
       ...product,
@@ -136,6 +138,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   };
 
   const handleAddToWishlist = () => {
+    if (!product) return;
     addToWishlist(product);
     const inWishlist = isInWishlist(product.id);
     setIsWishlisted(!inWishlist);
@@ -144,6 +147,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       description: `${product.name} has been ${!inWishlist ? 'added to' : 'removed from'} your wishlist.`,
     });
   };
+
+  if (!product) {
+    notFound();
+  }
 
   const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
   const images = product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls : [product.imageUrl];
@@ -216,9 +223,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 >
                   {product.variants.options.map(variant => (
                     <div key={variant.id}>
-                      <RadioGroupItem value={variant.id} id={variant.id} className="peer sr-only" />
+                      <RadioGroupItem value={variant.id} id={`variant-${variant.id}`} className="peer sr-only" />
                       <Label
-                        htmlFor={variant.id}
+                        htmlFor={`variant-${variant.id}`}
+                         onMouseEnter={() => { if(product.id === '9') handleOptionChange('Ukuran', variant.name) }}
                         className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                       >
                         <span>{variant.name}</span>
