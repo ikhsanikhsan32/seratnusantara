@@ -97,6 +97,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             'Kuning': 3,
             'Purple': 2, 
             'Grey': 3,
+            'Night': 1,
+            'Day': 2,
         };
         const slideIndex = colorMap[value];
         if (slideIndex !== undefined) {
