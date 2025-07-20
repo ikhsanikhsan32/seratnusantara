@@ -94,6 +94,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             'Hitam': 1,
             'Pink': 1,
             'Putih': 2,
+            'Kuning': 3,
             'Purple': 2, 
             'Grey': 3,
         };

@@ -367,6 +367,30 @@ export const products: Product[] = [
     aiHint: 'phone strap',
     vendorId: 'vendor-3'
   },
+  {
+    id: '25',
+    name: 'PUKA Tas Jellyfish Rajut Crochet Slingbag Handbag Ocean Series',
+    price: 305000,
+    category: 'Bags',
+    rating: 5.0,
+    imageUrl: 'https://i.ibb.co/tTgc2FVG/DSC04190.jpg',
+    imageUrls: [
+      'https://i.ibb.co/tTgc2FVG/DSC04190.jpg',
+      'https://i.ibb.co/tpW9hhYH/DSC04089.jpg',
+      'https://i.ibb.co/Wh0bfP2/DSC04080.jpg',
+      'https://i.ibb.co/LXtZ2pMg/DSC04100.jpg',
+    ],
+    description: 'UKURAN :\n- Diameter : 17cm\n- Handle : 35cm\n- Sling Bag bisa diatur maksimal 105cm\n\nPILIHAN WARNA :\n- Pink Blue\n- Yellow Purple\n- White Magenta\n\nSo just like the ocean, we hope you find the comfie in our newest collection✨\n\nTas Rajut Jellyfish dirajut dengan segenap hati oleh Ibu Dede seorang Crafter Disabilitas.',
+    availability: 'In Stock',
+    reviews: 12,
+    aiHint: 'crochet jellyfish bag',
+    vendorId: 'vendor-3',
+    options: [{
+      id: 'puka-jellyfish-color',
+      name: 'Warna',
+      values: ['Pink', 'Putih', 'Kuning'],
+    }],
+  },
 ];
 
 export type Category = {
