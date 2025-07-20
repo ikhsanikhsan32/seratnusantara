@@ -250,7 +250,7 @@ export const products: Product[] = [
       'https://i.ibb.co/FqXKB5Y6/DSC04001.jpg',
       'https://i.ibb.co/nqL4JMK1/DSC04006.jpg',
     ],
-    description: "So just like the ocean, we hope you find the comfie in our newest collection✨\n\nBando Maury dipayet berwarna-warni yang cantik bernuansa indahnya lautan\n\nAvailable Color: Pink, Purple, Grey\n\nMiliki Ocean Series: Coral Candy by Puka, berbagai aksesoris seperti Gelang, Anting, Bando, Tas, Bross, Kalung dan phone chain yang dibuat dengan beads cantik inspired by the ocean.\n\nCARA PERAWATAN : Cukup dilap tisue bagian payet jika terkena noda\n\nDISCLAIMER\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.",
+    description: "So just like the ocean, we hope you find the comfie in our newest collection✨\n\nBando Maury dipayet berwarna-warni yang cantik bernuansa indahnya lautan\n\nMiliki Ocean Series: Coral Candy by Puka, berbagai aksesoris seperti Gelang, Anting, Bando, Tas, Bross, Kalung dan phone chain yang dibuat dengan beads cantik inspired by the ocean.\n\nCARA PERAWATAN : Cukup dilap tisue bagian payet jika terkena noda\n\nDISCLAIMER\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.",
     availability: 'In Stock',
     reviews: 45,
     aiHint: 'beaded headband',
@@ -461,6 +461,24 @@ export const products: Product[] = [
       values: ['Ocean', 'Alice', 'Playfull', 'Lissi'],
     }],
   },
+  {
+    id: '29',
+    name: 'PUKA Tas Laptop Ulin laptop bag banyak compartment unik penuh gaya',
+    price: 385000,
+    category: 'Bags',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/YBC3XmVM/DSC02920.jpg',
+    imageUrls: [
+      'https://i.ibb.co/YBC3XmVM/DSC02920.jpg',
+      'https://i.ibb.co/hx3c1grS/DSC02933.jpg',
+      'https://i.ibb.co/DcStXjT/DSC02944.jpg',
+    ],
+    description: 'Dirancang dengan banyak kompartemen, Ulin Laptop Bag adalah solusi modern yang menyatu dengan nilai tradisional. Dibuat dari kain goni yang kuat dan ramah lingkungan, tas ini dihias dengan statement embroidery bertema kaulinan barudak. Nostalgia, dan penuh gaya !\n\nUlin Laptop Bag adalah pertemuan antara masa lalu dan masa kini. Di satu sisi, ia membawa fungsi teknologi untuk mobilitas dan produktivitas. Di sisi lain, sulaman motif permainan anak tradisional menyelipkan nilai-nilai budaya yang seakan berkata: “Jangan lupa asal kita.” Setiap kali kamu membuka tas ini untuk bekerja atau belajar, kamu membuka ruang dialog antara memori dan masa depan. Produk ini adalah bukti bahwa modernitas dan tradisi bisa hidup berdampingan, dengan harmoni yang diciptakan melalui karya inklusif. Cocok untuk mahasiswa, pelajar, hingga pekerja kreatif yang ingin tampil beda!\n\nSpesifikasi produk:\n• Ukuran : 40 x 30 cm\n• Muat laptop hingga 14-15 inci.\n• Bahan luar: Denim premium.\n• Aksen depan: Kain goni dengan sulam dan frill kuning cerah.\n• Tali selempang adjustable (warna fushia)\n•Kompartemen dalam: Kantong jaring, saku warna-warni organizer, dan slop laptop dengan padding pelindung.',
+    availability: 'In Stock',
+    reviews: 14,
+    aiHint: 'laptop bag',
+    vendorId: 'vendor-3',
+  }
 ];
 
 export type Category = {
