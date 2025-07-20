@@ -68,7 +68,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   }, [product, selectedVariantId]);
 
   const price = useMemo(() => {
-    return selectedVariant ? selectedVariant.price : product?.price ?? 0;
+    if (product?.variants?.options) {
+      return selectedVariant ? selectedVariant.price : product.variants.options[0].price;
+    }
+    return product?.price ?? 0;
   }, [product, selectedVariant]);
 
   useEffect(() => {
@@ -91,6 +94,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             'Hitam': 1,
             'Pink': 2,
             'Putih': 3,
+            'Purple': 2, 
+            'Grey': 3,
         };
         const slideIndex = colorMap[value];
         if (slideIndex !== undefined) {
@@ -231,6 +236,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                       <RadioGroupItem value={value} id={`${option.id}-${value}`} className="peer sr-only" />
                       <Label
                         htmlFor={`${option.id}-${value}`}
+                        onMouseEnter={() => handleOptionChange(option.name, value)}
                         className="flex items-center justify-center rounded-md border-2 border-muted bg-popover px-4 py-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                       >
                         {value}
