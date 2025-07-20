@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -71,7 +72,7 @@ export default function CartPage() {
                       <TableRow key={item.id}>
                         <TableCell>
                           <div className="flex items-center gap-4">
-                            <Image src={item.imageUrl} alt={item.name} width={80} height={80} className="rounded-md" data-ai-hint={item.aiHint} />
+                            <Image src={item.imageUrl} alt={item.name} width={80} height={80} className="rounded-md object-cover" data-ai-hint={item.aiHint} />
                             <div>
                               <p className="font-semibold">{item.name}</p>
                               <p className="text-sm text-muted-foreground">{item.category}</p>
