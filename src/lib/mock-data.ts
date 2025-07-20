@@ -237,6 +237,30 @@ export const products: Product[] = [
       values: ['Hitam', 'Pink', 'Putih'],
     }],
   },
+  {
+    id: '18',
+    name: 'PUKA Bando Maury Payet Manik-manik Terumbu Karang Colorful Ocean Series Bando Satin Padded Wanita',
+    price: 120000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://placehold.co/600x600.png',
+    imageUrls: [
+      'https://placehold.co/800x800.png',
+      'https://placehold.co/800x800.png',
+      'https://placehold.co/800x800.png',
+      'https://placehold.co/800x800.png',
+    ],
+    description: "So just like the ocean, we hope you find the comfie in our newest collection✨\n\nBando Maury dipayet berwarna-warni yang cantik bernuansa indahnya lautan\n\nAvailable Color: Pink, Purple, Grey\n\nMiliki Ocean Series: Coral Candy by Puka, berbagai aksesoris seperti Gelang, Anting, Bando, Tas, Bross, Kalung dan phone chain yang dibuat dengan beads cantik inspired by the ocean.\n\nCARA PERAWATAN : Cukup dilap tisue bagian payet jika terkena noda\n\nDISCLAIMER\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.",
+    availability: 'In Stock',
+    reviews: 45,
+    aiHint: 'beaded headband',
+    vendorId: 'vendor-3',
+    options: [{
+      id: 'puka-bando-color',
+      name: 'Warna',
+      values: ['Pink', 'Purple', 'Grey'],
+    }],
+  },
 ];
 
 export type Category = {

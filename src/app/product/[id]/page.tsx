@@ -92,7 +92,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     if (optionName === 'Warna' && carouselApi) {
         const colorMap: Record<string, number> = {
             'Hitam': 1,
-            'Pink': 2,
+            'Pink': product.id === '18' ? 1 : 2, // Bando starts at Pink on slide 2 (index 1)
             'Putih': 3,
             'Purple': 2, 
             'Grey': 3,
@@ -193,7 +193,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
           <p className="mt-4 text-3xl font-bold text-primary">{formatPrice(price)}</p>
 
-          <p className="mt-6 text-muted-foreground">{product.description}</p>
+          <p className="mt-6 text-muted-foreground whitespace-pre-wrap">{product.description}</p>
           
           <Separator className="my-8" />
 
