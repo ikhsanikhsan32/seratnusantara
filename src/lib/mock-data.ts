@@ -331,6 +331,24 @@ export const products: Product[] = [
     aiHint: 'jellyfish keychain',
     vendorId: 'vendor-3'
   },
+  {
+    id: '23',
+    name: 'PUKA Gelang Manami Beads Terumbu Karang Manik-manik Colorful Ocean Series',
+    price: 45000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/LhHbVjKv/DSC04062.jpg',
+    imageUrls: [
+        'https://i.ibb.co/LhHbVjKv/DSC04062.jpg',
+        'https://i.ibb.co/kVz0qXgY/DSC04064.jpg',
+        'https://i.ibb.co/Nnmr7c16/DSC04060.jpg',
+    ],
+    description: 'So just like the ocean, we hope you find the comfie in our newest collection✨\n\nGelang Manami lucu, imut dan warna-warni. Spesial buatan teman-teman inklusif.\n\nMiliki Ocean Series: Coral Candy by Puka, berbagai aksesoris seperti Gelang, Anting, Bando, Tas, Bross, Kalung dan phone chain yang dibuat dengan beads cantik inspired by the ocean.\n\nDISCLAIMER\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.',
+    availability: 'In Stock',
+    reviews: 15,
+    aiHint: 'beaded bracelet',
+    vendorId: 'vendor-3'
+  },
 ];
 
 export type Category = {
