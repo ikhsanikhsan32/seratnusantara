@@ -278,6 +278,23 @@ export const products: Product[] = [
     aiHint: 'beaded brooch',
     vendorId: 'vendor-3'
   },
+  {
+    id: '20',
+    name: 'PUKA Anting Moana Perhiasan Payet Colorful Beads Ocean Series Aksesoris Wanita',
+    price: 85000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/Ld3Q2Cnf/DSC04040.jpg',
+    imageUrls: [
+      'https://i.ibb.co/Ld3Q2Cnf/DSC04040.jpg',
+      'https://i.ibb.co/LDCsTH75/DSC04032.jpg'
+    ],
+    description: "So just like the ocean, we hope you find the comfie in our newest collection✨\n\nAnting tusuk dihias dengan sequins bernuansa terumbu karang di lautan yang indah. Spesial buatan teman-teman inklusif.\n\nMiliki Ocean Series: Coral Candy by Puka, berbagai aksesoris seperti Gelang, Anting, Bando, Tas, Bross, Kalung dan phone chain yang dibuat dengan beads cantik inspired by the ocean.\n\nDISCLAIMER\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.",
+    availability: 'In Stock',
+    reviews: 38,
+    aiHint: 'beaded earrings',
+    vendorId: 'vendor-3'
+  },
 ];
 
 export type Category = {
