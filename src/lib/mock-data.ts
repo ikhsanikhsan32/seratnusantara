@@ -313,6 +313,24 @@ export const products: Product[] = [
     aiHint: 'beaded necklace',
     vendorId: 'vendor-3'
   },
+  {
+    id: '22',
+    name: 'PUKA Keychain Lucu Jellyfish Ocean Series Colorful Gantungan Kunci Ubur-ubur',
+    price: 75000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/bMDL3Vkn/DSC04052.jpg',
+    imageUrls: [
+      'https://i.ibb.co/bMDL3Vkn/DSC04052.jpg',
+      'https://i.ibb.co/Fj6wN4n/DSC04055.jpg',
+      'https://i.ibb.co/MDFH67mj/DSC04058.jpg'
+    ],
+    description: 'So just like the ocean, we hope you find the comfie in our newest collection✨\n\nKeychain Jellyfish lucu, imut dan warna-warni. Spesial buatan teman-teman inklusif.\n\nMiliki Ocean Series: Coral Candy by Puka, berbagai aksesoris seperti Gelang, Anting, Bando, Tas, Bross, Kalung dan phone chain yang dibuat dengan beads cantik inspired by the ocean.\n\nDISCLAIMER\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.',
+    availability: 'In Stock',
+    reviews: 25,
+    aiHint: 'jellyfish keychain',
+    vendorId: 'vendor-3'
+  },
 ];
 
 export type Category = {
