@@ -105,7 +105,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-black/50" />
                   <div className="relative z-10 container mx-auto px-4 h-full grid grid-cols-1 md:grid-cols-2 items-center">
                     <div className="hidden md:flex justify-start items-center h-full">
-                       <div key={`image-${currentSlide}`} className="relative w-full h-full animate-fade-in-left">
+                       <div key={`image-${currentSlide}`} className="relative w-full h-full animate-fade-in-left-then-float">
                           <Image 
                               src={slide.productImageUrl} 
                               alt={slide.title} 
