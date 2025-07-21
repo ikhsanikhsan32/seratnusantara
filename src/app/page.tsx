@@ -45,7 +45,7 @@ export default function Home() {
   const heroSlides = [
     {
       title: 'Style for a Better Earth',
-      description: 'Discover our new collection of curated items, designed to fit your life.',
+      description: 'Industri fashion merupakan salah satu sektor dengan pertumbuhan tercepat di dunia, namun juga menjadi penyumbang limbah terbesar. Setiap tahunnya, dunia menghasilkan sekitar 92 juta ton limbah tekstil, dengan industri fashion menyumbang 10% dari emisi karbon global (European Parliament, 2020). Di Indonesia, sekitar 2,3 juta ton limbah pakaian dihasilkan setiap tahun setara dengan 12% limbah rumah tangga nasional (Indotextiles, 2023).',
       bgImageUrl: 'https://i.ibb.co/6cXqZPF7/Frame-1-11.png',
       bgAiHint: 'fashion store',
       productImageUrl: 'https://i.ibb.co/TxfJfH54/uohouho-1.png',
