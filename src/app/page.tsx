@@ -48,7 +48,7 @@ export default function Home() {
       description: 'Discover our new collection of curated items, designed to fit your life.',
       bgImageUrl: 'https://i.ibb.co/GfV0m8NV/Frame-1-9.png',
       bgAiHint: 'fashion store',
-      productImageUrl: 'https://placehold.co/400x500.png',
+      productImageUrl: 'https://i.ibb.co/bRGpd2vR/uohouho.png',
       productAiHint: 'fashion accessory',
       buttonText: 'Shop Now',
       buttonLink: '/shop',
