@@ -25,6 +25,16 @@ export type ProductOption = {
   values: string[];
 };
 
+export type Review = {
+    id: string;
+    author: string;
+    avatarUrl: string;
+    rating: number;
+    comment: string;
+    date: string;
+    images?: string[];
+};
+
 export type Product = {
   id: string;
   name: string;
@@ -43,6 +53,7 @@ export type Product = {
     options: ProductVariant[];
   };
   options?: ProductOption[];
+  customerReviews?: Review[];
 };
 
 export const products: Product[] = [
@@ -74,6 +85,27 @@ export const products: Product[] = [
         { id: 'pot-large', name: 'Besar', price: 50000 },
       ],
     },
+    customerReviews: [
+        {
+            id: 'rev-9-1',
+            author: 'Budi Santoso',
+            avatarUrl: 'https://i.pravatar.cc/40?u=budi',
+            rating: 5,
+            comment: 'Potnya bagus dan ramah lingkungan. Ukuran sedang pas untuk tanaman hias di teras saya. Pengiriman cepat dan aman. Mantap!',
+            date: '2023-10-15',
+        },
+        {
+            id: 'rev-9-2',
+            author: 'Citra Lestari',
+            avatarUrl: 'https://i.pravatar.cc/40?u=citra',
+            rating: 4,
+            comment: 'Suka dengan konsep biodegradable-nya. Bahannya unik, semoga awet. Mungkin bisa ditambahkan pilihan warna.',
+            date: '2023-10-12',
+            images: [
+                'https://placehold.co/100x100.png',
+            ]
+        },
+    ],
   },
   {
     id: '10',
@@ -244,6 +276,28 @@ export const products: Product[] = [
       name: 'Warna',
       values: ['Hitam', 'Pink', 'Putih'],
     }],
+    customerReviews: [
+        {
+            id: 'rev-17-1',
+            author: 'Rina Amelia',
+            avatarUrl: 'https://i.pravatar.cc/40?u=rina',
+            rating: 5,
+            comment: 'Tasnya cantik banget! Payetnya rapi dan berkilau. Ukurannya pas buat hangout. Suka banget sama detailnya, kelihatan mewah. Recommended!',
+            date: '2023-11-01',
+            images: [
+                'https://placehold.co/100x100.png',
+                'https://placehold.co/100x100.png',
+            ]
+        },
+        {
+            id: 'rev-17-2',
+            author: 'Dewi Anggraini',
+            avatarUrl: 'https://i.pravatar.cc/40?u=dewi',
+            rating: 5,
+            comment: 'Handmade tapi kualitasnya oke banget. Desainnya unik, gak pasaran. Jadi pusat perhatian pas dipakai. Pengirimannya juga cepat. Thank you Puka!',
+            date: '2023-10-28',
+        },
+    ]
   },
   {
     id: '18',

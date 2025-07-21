@@ -15,7 +15,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
-import { Star, Heart, ShoppingCart, Minus, Plus, CheckCircle, MessageSquare, Store as StoreIcon } from 'lucide-react';
+import { Star, Heart, ShoppingCart, Minus, Plus, CheckCircle, MessageSquare, Store as StoreIcon, Smile } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { ProductCard } from '@/components/product-card';
 import { useState, useMemo, useEffect, useCallback } from 'react';
@@ -53,6 +53,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   const product = useMemo(() => products.find((p) => p.id === params.id), [params.id]);
   const vendor = useMemo(() => vendors.find(v => v.id === product?.vendorId), [product]);
   const vendorProductsCount = useMemo(() => products.filter(p => p.vendorId === vendor?.id).length, [vendor]);
+  const otherVendorProducts = useMemo(() => {
+    if (!vendor) return [];
+    return products.filter(p => p.vendorId === vendor.id && p.id !== params.id).slice(0, 6);
+  }, [vendor, params.id]);
 
 
   const [quantity, setQuantity] = useState(1);
@@ -404,6 +408,94 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         </CardContent>
       </Card>
 
+      {/* Reviews and More from Vendor Section */}
+      <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-4">
+        <div className="lg:col-span-3">
+          <Card>
+            <CardHeader>
+                <CardTitle className="font-headline text-xl">Penilaian Produk</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <div className="rounded-lg border bg-secondary/50 p-4">
+                    <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
+                        <div>
+                            <span className="text-4xl font-bold">{product.rating.toFixed(1)}</span>
+                            <span className="text-xl text-muted-foreground"> dari 5</span>
+                            <div className="mt-1 flex items-center">
+                                {[...Array(5)].map((_, i) => (
+                                    <Star key={i} className={`h-5 w-5 ${i < Math.round(product.rating) ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} />
+                                ))}
+                            </div>
+                        </div>
+                        <div className="mt-4 flex flex-wrap gap-2 sm:ml-auto sm:mt-0">
+                            <Button variant="outline" size="sm" className="bg-background border-primary text-primary">Semua</Button>
+                            <Button variant="outline" size="sm">5 Bintang ({product.customerReviews?.filter(r => r.rating === 5).length ?? 0})</Button>
+                            <Button variant="outline" size="sm">4 Bintang ({product.customerReviews?.filter(r => r.rating === 4).length ?? 0})</Button>
+                            <Button variant="outline" size="sm">3 Bintang ({product.customerReviews?.filter(r => r.rating === 3).length ?? 0})</Button>
+                            <Button variant="outline" size="sm">2 Bintang ({product.customerReviews?.filter(r => r.rating === 2).length ?? 0})</Button>
+                            <Button variant="outline" size="sm">1 Bintang ({product.customerReviews?.filter(r => r.rating === 1).length ?? 0})</Button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-8 space-y-8">
+                    {product.customerReviews && product.customerReviews.length > 0 ? (
+                        product.customerReviews.map(review => (
+                            <div key={review.id} className="flex gap-4">
+                                <Avatar>
+                                    <AvatarImage src={review.avatarUrl} />
+                                    <AvatarFallback>{review.author.charAt(0)}</AvatarFallback>
+                                </Avatar>
+                                <div className="flex-1">
+                                    <p className="font-semibold">{review.author}</p>
+                                    <div className="mt-1 flex items-center">
+                                        {[...Array(5)].map((_, i) => (
+                                            <Star key={i} className={`h-4 w-4 ${i < review.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} />
+                                        ))}
+                                    </div>
+                                    <p className="mt-1 text-sm text-muted-foreground">{review.date}</p>
+                                    <p className="mt-2">{review.comment}</p>
+                                    {review.images && review.images.length > 0 && (
+                                        <div className="mt-2 flex gap-2">
+                                            {review.images.map((img, i) => (
+                                                <Image key={i} src={img} alt={`review image ${i+1}`} width={80} height={80} className="rounded-md object-cover" />
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="flex flex-col items-center justify-center py-16 text-center">
+                            <Smile className="h-16 w-16 text-muted-foreground/50" />
+                            <p className="mt-4 font-semibold">Belum ada penilaian</p>
+                            <p className="text-sm text-muted-foreground">Jadilah yang pertama memberikan ulasan untuk produk ini.</p>
+                        </div>
+                    )}
+                </div>
+            </CardContent>
+          </Card>
+        </div>
+        <div className="lg:col-span-1">
+            <h3 className="font-headline text-lg font-semibold">Lainnya dari toko ini</h3>
+            <div className="mt-4 space-y-4">
+                {otherVendorProducts.map(p => (
+                    <Link key={p.id} href={`/product/${p.id}`}>
+                        <Card className="overflow-hidden transition-shadow hover:shadow-md">
+                            <CardContent className="p-0">
+                                <Image src={p.imageUrl} alt={p.name} width={200} height={200} className="w-full aspect-square object-cover" />
+                                <div className="p-3">
+                                    <p className="truncate text-sm font-semibold">{p.name}</p>
+                                    <p className="text-sm font-bold text-primary">{formatPrice(p.price)}</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </Link>
+                ))}
+            </div>
+        </div>
+      </div>
+
 
       {/* Related Products */}
       <div className="mt-16">
@@ -415,5 +507,3 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     </div>
   );
 }
-
-    
