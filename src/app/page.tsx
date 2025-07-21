@@ -76,8 +76,8 @@ export default function Home() {
       bgAiHint: 'living room decor',
       productImageUrl: 'https://i.ibb.co/YBkz1c0W/uohouho-3.png',
       productAiHint: 'decorative lamp',
-      buttonText: 'Decorate Your Home',
-      buttonLink: '/shop?category=home',
+      buttonText: 'Selengkapnya',
+      buttonLink: '/blog/smart-home-guide',
     },
   ];
 
@@ -133,7 +133,10 @@ export default function Home() {
                         className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90"
                         size="lg"
                       >
-                        <Link href={slide.buttonLink} target="_blank" rel="noopener noreferrer">
+                        <Link 
+                          href={slide.buttonLink}
+                          {...(slide.buttonLink.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                        >
                           {slide.buttonText} <ArrowRight className="ml-2" />
                         </Link>
                       </Button>
