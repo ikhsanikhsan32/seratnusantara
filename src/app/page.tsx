@@ -50,8 +50,8 @@ export default function Home() {
       bgAiHint: 'fashion store',
       productImageUrl: 'https://i.ibb.co/TxfJfH54/uohouho-1.png',
       productAiHint: 'fashion accessory',
-      buttonText: 'Shop Now',
-      buttonLink: '/shop',
+      buttonText: 'Selengkapnya',
+      buttonLink: 'https://youtu.be/tZh7lBC_Z7o?si=ee0KbHIfiAs1q7ny',
     },
     {
       title: 'Latest in Electronics',
