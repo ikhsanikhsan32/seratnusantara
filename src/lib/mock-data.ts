@@ -683,7 +683,24 @@ export type BlogPost = {
 };
 
 export const blogPosts: BlogPost[] = [
-  { id: '2', slug: 'smart-home-guide', title: 'Upcycling Limbah Sawit: Dari Limbah ke Lini Fashion Berkelanjutan', author: 'Hesti Indriani', date: 'July 15, 2025', excerpt: 'Transform your living space with the latest smart home technology. Our guide will help you get started.', content: '<p>Full blog post content goes here...</p>', imageUrl: 'https://placehold.co/800x600.png', aiHint: 'smart home' },
+  { 
+    id: '2', 
+    slug: 'smart-home-guide', 
+    title: 'Upcycling Limbah Sawit: Dari Limbah ke Lini Fashion Berkelanjutan', 
+    author: 'Hesti Indriani', 
+    date: 'July 15, 2025', 
+    excerpt: 'Transform your living space with the latest smart home technology. Our guide will help you get started.', 
+    content: `
+      <h3>Transformasi Limbah Sawit: Menenun Gaya, Menjaga Bumi</h3>
+      <p>Industri kelapa sawit kerap kali menjadi sorotan karena dampaknya terhadap lingkungan mulai dari deforestasi, emisi karbon, hingga pencemaran limbah cair. Namun, di balik tantangan tersebut, tersimpan potensi besar yang kerap terabaikan: limbah kelapa sawit sebagai sumber daya alternatif yang dapat diolah menjadi produk bernilai tinggi. Salah satu bentuk inovasi yang tengah berkembang adalah pemanfaatan tandan kosong kelapa sawit (TKKS) dan seratnya sebagai bahan dasar dalam dunia fashion berkelanjutan.</p>
+      <p>TKKS, yang semula hanya dianggap limbah padat tak bernilai, ternyata memiliki karakteristik unik berserat kuat, tahan lama, dan biodegradable. Serat ini, setelah melalui proses ekstraksi dan pemintalan, dapat diubah menjadi benang, lalu ditenun menjadi lembaran kain. Dari sinilah benih-benih inovasi fashion ramah lingkungan mulai tumbuh.</p>
+      <h4>Dari Limbah Menjadi Gaya: Fashion yang Berakar pada Alam</h4>
+      <p>Bayangkan sebuah tas tangan yang tak hanya memukau secara visual, tetapi juga menyimpan cerita keberlanjutan. Atau sepatu yang tidak sekadar bergaya, melainkan juga menjaga bumi. Serat sawit telah membuka jalan bagi terciptanya beragam produk fashion mulai dari tas, dompet, sepatu, hingga aksesori yang mengusung nilai ekologi dan etika.</p>
+      <p>Lebih dari sekadar bahan alternatif, kain berbasis TKKS hadir sebagai solusi konkret untuk mengurangi ketergantungan pada tekstil sintetis yang mencemari lingkungan. Di saat yang sama, ia membawa identitas lokal, terutama ketika proses produksinya dilakukan secara handmade menggunakan Alat Tenun Bukan Mesin (ATBM). Hal ini tak hanya menghidupkan kembali tradisi kerajinan, tetapi juga memberdayakan komunitas perajin lokal.</p>
+      <p>Perubahan iklim dan krisis lingkungan global telah mendorong konsumen untuk berpikir lebih kritis dalam memilih produk. Kini, fashion bukan hanya soal tren dan gaya, tetapi juga soal narasi dan nilai. Saat kita mengenakan produk dari limbah sawit, kita sesungguhnya mengenakan komitmen: bahwa mode bisa menjadi alat perubahan, bukan sekadar simbol gaya hidup.</p>`, 
+    imageUrl: 'https://i.ibb.co/YBdQ7HRS/utututu.jpg', 
+    aiHint: 'palm oil waste fashion' 
+  },
 ];
 
 export type FaqItem = {
