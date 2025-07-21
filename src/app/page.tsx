@@ -97,6 +97,7 @@ export default function Home() {
                     src={slide.bgImageUrl}
                     alt={slide.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, 100vw"
                     className="object-cover"
                     data-ai-hint={slide.bgAiHint}
                     priority={index === 0}
