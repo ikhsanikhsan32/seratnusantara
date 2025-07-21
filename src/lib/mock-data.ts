@@ -100,6 +100,31 @@ export const products: Product[] = [
     vendorId: 'vendor-1',
     customerReviews: []
   },
+  {
+    id: '34',
+    name: 'Fairy Bracelet',
+    price: 15000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/nGQRK4r/20241012-233931.jpg',
+    imageUrls: [
+        'https://i.ibb.co/nGQRK4r/20241012-233931.jpg',
+        'https://i.ibb.co/KxzYTcs1/20241012-234102.jpg',
+        'https://i.ibb.co/Kxy49ZB7/Screenshot-2025-07-21-141549.png',
+        'https://i.ibb.co/kgXNXNTz/Screenshot-2025-07-21-141542.png',
+    ],
+    description: "Add a magical touch to your wrist with the 🧚‍♂️ Fairy Bracelet 🧚‍♀️– because who says fairies can’t be stylish?\n\nGelang tali yang eksklusif, unik, dan tahan lama bernama Fairy Bracelet! 🫧",
+    availability: 'In Stock',
+    reviews: 19,
+    aiHint: 'fairy bracelet',
+    vendorId: 'vendor-1',
+    options: [{
+        id: 'fairy-bracelet-model',
+        name: 'Model',
+        values: ['Model 1', 'Model 2', 'Model 3', 'Model 4'],
+    }],
+    customerReviews: []
+  },
   { id: '2', name: 'Wireless Noise-Cancelling Headphones', price: 2499000, category: 'Accessories', rating: 4.8, imageUrl: 'https://placehold.co/600x600.png', description: 'Immerse yourself in sound with these premium headphones.', availability: 'In Stock', reviews: 250, aiHint: 'headphones', vendorId: 'vendor-1' },
   // Green Fast Sawit Products
   {

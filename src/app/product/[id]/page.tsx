@@ -156,6 +156,18 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 carouselApi.scrollTo(slideIndex, false);
             }
         }
+        if (product?.id === '34' && optionName === 'Model') {
+            const modelMap: Record<string, number> = {
+                'Model 1': 0,
+                'Model 2': 1,
+                'Model 3': 2,
+                'Model 4': 3,
+            };
+            const slideIndex = modelMap[value];
+            if (slideIndex !== undefined) {
+                carouselApi.scrollTo(slideIndex, false);
+            }
+        }
     }
   }, [carouselApi, product?.id]);
 
