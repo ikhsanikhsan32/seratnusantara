@@ -125,7 +125,6 @@ export const products: Product[] = [
     }],
     customerReviews: []
   },
-  { id: '2', name: 'Wireless Noise-Cancelling Headphones', price: 2499000, category: 'Accessories', rating: 4.8, imageUrl: 'https://placehold.co/600x600.png', description: 'Immerse yourself in sound with these premium headphones.', availability: 'In Stock', reviews: 250, aiHint: 'headphones', vendorId: 'vendor-1' },
   // Green Fast Sawit Products
   {
     id: '9',
