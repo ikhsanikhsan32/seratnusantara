@@ -1,6 +1,9 @@
 
+"use client";
+
+import { useState, useMemo } from 'react';
 import { ProductCard } from '@/components/product-card';
-import { products, categories } from '@/lib/mock-data';
+import { products as allProducts, categories } from '@/lib/mock-data';
 import {
   Pagination,
   PaginationContent,
@@ -17,7 +20,21 @@ import { Slider } from '@/components/ui/slider';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Star } from 'lucide-react';
 
+function formatPrice(price: number) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  }).format(price);
+}
+
 export default function ShopPage() {
+  const [priceRange, setPriceRange] = useState([50000000]);
+
+  const filteredProducts = useMemo(() => {
+    return allProducts.filter(product => product.price <= priceRange[0]);
+  }, [priceRange]);
+
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
@@ -51,10 +68,16 @@ export default function ShopPage() {
               {/* Price Filter */}
               <div>
                 <h3 className="font-semibold">Price Range</h3>
-                <Slider defaultValue={[25000000]} max={100000000} step={500000} className="mt-4" />
+                <Slider
+                  value={priceRange}
+                  onValueChange={setPriceRange}
+                  max={100000000}
+                  step={500000}
+                  className="mt-4"
+                />
                 <div className="mt-2 flex justify-between text-sm text-muted-foreground">
                   <span>Rp 0</span>
-                  <span>Rp 100.000.000+</span>
+                  <span>{formatPrice(priceRange[0])}</span>
                 </div>
               </div>
 
@@ -81,7 +104,7 @@ export default function ShopPage() {
         {/* Product Grid */}
         <main className="lg:col-span-3">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>

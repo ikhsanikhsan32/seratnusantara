@@ -1,4 +1,7 @@
 
+"use client";
+
+import { useState, useMemo } from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { vendors, products, categories } from '@/lib/mock-data';
@@ -8,6 +11,14 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
 import { ProductCard } from '@/components/product-card';
 
+function formatPrice(price: number) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  }).format(price);
+}
+
 export default function VendorPublicPage({ params }: { params: { id: string } }) {
   const vendor = vendors.find((v) => v.id === params.id);
   
@@ -15,7 +26,16 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
     notFound();
   }
 
-  const vendorProducts = products.filter(p => p.vendorId === vendor.id);
+  const [priceRange, setPriceRange] = useState([50000000]);
+
+  const vendorProducts = useMemo(() => {
+    return products.filter(p => p.vendorId === vendor.id);
+  }, [vendor.id]);
+
+  const filteredProducts = useMemo(() => {
+    return vendorProducts.filter(product => product.price <= priceRange[0]);
+  }, [vendorProducts, priceRange]);
+
   const vendorCategories = [...new Set(vendorProducts.map(p => p.category))].map(catName => categories.find(c => c.name === catName)).filter(Boolean);
 
   return (
@@ -62,10 +82,16 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
               {/* Price Filter */}
               <div>
                 <h3 className="font-semibold">Price Range</h3>
-                <Slider defaultValue={[25000000]} max={100000000} step={500000} className="mt-4" />
+                <Slider
+                  value={priceRange}
+                  onValueChange={setPriceRange}
+                  max={100000000}
+                  step={500000}
+                  className="mt-4"
+                />
                 <div className="mt-2 flex justify-between text-sm text-muted-foreground">
                   <span>Rp 0</span>
-                  <span>Rp 100.000.000+</span>
+                  <span>{formatPrice(priceRange[0])}</span>
                 </div>
               </div>
             </CardContent>
@@ -74,9 +100,9 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
 
         {/* Product Grid */}
         <main className="lg:col-span-3">
-          {vendorProducts.length > 0 ? (
+          {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-3">
-              {vendorProducts.map((product) => (
+              {filteredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
@@ -84,7 +110,7 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
              <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-border p-12 text-center h-full">
               <h2 className="mt-6 font-headline text-xl font-semibold">No products found</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                This vendor has not listed any products yet.
+                No products match the selected price range.
               </p>
             </div>
           )}
