@@ -44,7 +44,7 @@ export default function Home() {
 
   const heroSlides = [
     {
-      title: 'Style for Every Story',
+      title: 'Style for a Better Earth',
       description: 'Discover our new collection of curated items, designed to fit your life.',
       bgImageUrl: 'https://i.ibb.co/6cXqZPF7/Frame-1-11.png',
       bgAiHint: 'fashion store',
