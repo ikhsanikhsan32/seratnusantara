@@ -487,7 +487,28 @@ export const products: Product[] = [
     reviews: 14,
     aiHint: 'laptop bag',
     vendorId: 'vendor-3',
-  }
+  },
+  {
+    id: '30',
+    name: 'PUKA Wonder Watch Jam Tangan Lucu Manik-manik Wanita handmade',
+    price: 225000,
+    category: 'Accessories',
+    rating: 4.8,
+    imageUrl: 'https://i.ibb.co/bjQd1xXV/Screenshot-2025-07-21-074808.png',
+    imageUrls: [
+        'https://i.ibb.co/bjQd1xXV/Screenshot-2025-07-21-074808.png',
+    ],
+    description: 'Outer Backhome dengan ilustrasi buatan Nabila ilustrator istimewa 😍\n\nCARA PERAWATAN : \nWash Machine\n\nDISCLAIMER:\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.',
+    availability: 'In Stock',
+    reviews: 12,
+    aiHint: 'beaded watch handmade',
+    vendorId: 'vendor-3',
+    options: [{
+        id: 'wonder-watch-size',
+        name: 'Ukuran',
+        values: ['S', 'M', 'L', 'XL', 'XXL'],
+    }],
+  },
 ];
 
 export type Category = {
