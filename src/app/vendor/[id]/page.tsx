@@ -26,16 +26,15 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
 
   const [maxPrice, setMaxPrice] = useState<number | ''>('');
   const [displayPrice, setDisplayPrice] = useState<string>('');
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const vendorProducts = useMemo(() => {
     return products.filter(p => p.vendorId === vendor.id);
   }, [vendor.id]);
 
   const vendorCategories = useMemo(() => {
-    return [...new Set(vendorProducts.map(p => p.category))]
-      .map(catName => categories.find(c => c.name === catName))
-      .filter((c): c is NonNullable<typeof c> => c !== undefined && c !== null);
+    const allVendorCategories = [...new Set(vendorProducts.map(p => p.category))];
+    return categories.filter(c => allVendorCategories.includes(c.name));
   }, [vendorProducts]);
 
   const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,13 +47,17 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
   };
 
   const handleCategoryChange = (categorySlug: string) => {
-    setSelectedCategory(prev => (prev === categorySlug ? null : categorySlug));
+    setSelectedCategories(prev => 
+      prev.includes(categorySlug) 
+        ? prev.filter(slug => slug !== categorySlug) 
+        : [...prev, categorySlug]
+    );
   };
 
   const resetFilters = () => {
     setMaxPrice('');
     setDisplayPrice('');
-    setSelectedCategory(null);
+    setSelectedCategories([]);
   };
   
   const filteredProducts = useMemo(() => {
@@ -63,20 +66,16 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
     if (maxPrice !== '' && maxPrice > 0) {
       productsToFilter = productsToFilter.filter(product => product.price <= maxPrice);
     }
-
-    if (selectedCategory) {
-      productsToFilter = productsToFilter.filter(product => product.category === categories.find(c => c.slug === selectedCategory)?.name);
+    
+    if (selectedCategories.length > 0) {
+        const selectedCategoryNames = categories
+            .filter(c => selectedCategories.includes(c.slug))
+            .map(c => c.name);
+        productsToFilter = productsToFilter.filter(product => selectedCategoryNames.includes(product.category));
     }
 
     return productsToFilter;
-  }, [vendorProducts, maxPrice, selectedCategory]);
-  
-  const displayedCategories = useMemo(() => {
-    if (selectedCategory) {
-      return vendorCategories.filter(c => c.slug === selectedCategory);
-    }
-    return vendorCategories;
-  }, [vendorCategories, selectedCategory]);
+  }, [vendorProducts, maxPrice, selectedCategories]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -110,11 +109,11 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
                 <div>
                   <h3 className="font-semibold">Category</h3>
                   <div className="mt-4 space-y-2">
-                    {displayedCategories.map((category) => (
+                    {vendorCategories.map((category) => (
                       <div key={category.id} className="flex items-center space-x-2">
                         <Checkbox
                           id={`cat-${category.id}`}
-                          checked={selectedCategory === category.slug}
+                          checked={selectedCategories.includes(category.slug)}
                           onCheckedChange={() => handleCategoryChange(category.slug)}
                         />
                         <Label htmlFor={`cat-${category.id}`}>{category.name}</Label>

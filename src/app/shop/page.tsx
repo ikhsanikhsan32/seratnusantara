@@ -26,15 +26,10 @@ const formatNumber = (num: number): string => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 };
 
-// Helper to parse formatted string to number
-const parseFormattedNumber = (str: string): number => {
-  return parseInt(str.replace(/\./g, ''), 10) || 0;
-};
-
 export default function ShopPage() {
   const [maxPrice, setMaxPrice] = useState<number | ''>('');
   const [displayPrice, setDisplayPrice] = useState<string>('');
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value.replace(/\./g, '');
@@ -46,13 +41,17 @@ export default function ShopPage() {
   };
 
   const handleCategoryChange = (categorySlug: string) => {
-    setSelectedCategory(prev => (prev === categorySlug ? null : categorySlug));
+    setSelectedCategories(prev => 
+      prev.includes(categorySlug) 
+        ? prev.filter(slug => slug !== categorySlug) 
+        : [...prev, categorySlug]
+    );
   };
   
   const resetFilters = () => {
     setMaxPrice('');
     setDisplayPrice('');
-    setSelectedCategory(null);
+    setSelectedCategories([]);
   };
 
   const filteredProducts = useMemo(() => {
@@ -61,20 +60,16 @@ export default function ShopPage() {
     if (maxPrice !== '' && maxPrice > 0) {
       products = products.filter(product => product.price <= maxPrice);
     }
-
-    if (selectedCategory) {
-      products = products.filter(product => product.category === categories.find(c => c.slug === selectedCategory)?.name);
+    
+    if (selectedCategories.length > 0) {
+        const selectedCategoryNames = categories
+            .filter(c => selectedCategories.includes(c.slug))
+            .map(c => c.name);
+        products = products.filter(product => selectedCategoryNames.includes(product.category));
     }
     
     return products;
-  }, [maxPrice, selectedCategory]);
-
-  const displayedCategories = useMemo(() => {
-    if (selectedCategory) {
-      return categories.filter(c => c.slug === selectedCategory);
-    }
-    return categories;
-  }, [selectedCategory]);
+  }, [maxPrice, selectedCategories]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -98,11 +93,11 @@ export default function ShopPage() {
               <div>
                 <h3 className="font-semibold">Category</h3>
                 <div className="mt-4 space-y-2">
-                  {displayedCategories.map((category) => (
+                  {categories.map((category) => (
                     <div key={category.id} className="flex items-center space-x-2">
                       <Checkbox
                         id={`cat-${category.id}`}
-                        checked={selectedCategory === category.slug}
+                        checked={selectedCategories.includes(category.slug)}
                         onCheckedChange={() => handleCategoryChange(category.slug)}
                       />
                       <Label htmlFor={`cat-${category.id}`}>{category.name}</Label>
