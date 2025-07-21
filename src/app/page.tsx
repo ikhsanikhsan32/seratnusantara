@@ -60,7 +60,7 @@ export default function Home() {
       description: 'Explore cutting-edge gadgets that redefine your world.',
       bgImageUrl: 'https://i.ibb.co/tTYXpQR7/Frame-1-14.png',
       bgAiHint: 'modern gadgets',
-      productImageUrl: 'https://placehold.co/400x500.png',
+      productImageUrl: 'https://i.ibb.co/nNY3YG1m/uohouho-2.png',
       productAiHint: 'smart watch',
       buttonText: 'Explore Gadgets',
       buttonLink: '/shop?category=electronics',
