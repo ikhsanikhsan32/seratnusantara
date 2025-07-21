@@ -46,7 +46,7 @@ export default function Home() {
     {
       title: 'Style for Every Story',
       description: 'Discover our new collection of curated items, designed to fit your life.',
-      bgImageUrl: 'https://placehold.co/1600x900.png',
+      bgImageUrl: 'https://i.ibb.co/GfV0m8NV/Frame-1-9.png',
       bgAiHint: 'fashion store',
       productImageUrl: 'https://placehold.co/400x500.png',
       productAiHint: 'fashion accessory',
