@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, ShoppingCart, Star, Store } from "lucide-react";
+import { Heart, ShoppingCart, Star, Store, Flame } from "lucide-react";
 import type { Product } from "@/lib/mock-data";
 import { vendors } from "@/lib/mock-data";
 import { Badge } from "./ui/badge";
@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 
 interface ProductCardProps {
   product: Product;
+  isTrending?: boolean;
 }
 
 function formatPrice(price: number) {
@@ -25,7 +26,7 @@ function formatPrice(price: number) {
   }).format(price);
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, isTrending }: ProductCardProps) {
   const { addToCart, addToWishlist, isInWishlist, isLoaded } = useStore();
   const { toast } = useToast();
   const vendor = vendors.find(v => v.id === product.vendorId);
@@ -79,6 +80,11 @@ export function ProductCard({ product }: ProductCardProps) {
               data-ai-hint={product.aiHint}
             />
           </Link>
+          {isTrending && (
+            <div className="absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-orange-500 text-white shadow-md">
+              <span>🔥</span>
+            </div>
+          )}
           <Button
             size="icon"
             variant="secondary"
