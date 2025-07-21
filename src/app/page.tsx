@@ -46,7 +46,7 @@ export default function Home() {
     {
       title: 'Style for Every Story',
       description: 'Discover our new collection of curated items, designed to fit your life.',
-      bgImageUrl: 'https://i.ibb.co/GfV0m8NV/Frame-1-9.png',
+      bgImageUrl: 'https://i.ibb.co/d0qxCz1K/Frame-1-10.png',
       bgAiHint: 'fashion store',
       productImageUrl: 'https://i.ibb.co/TxfJfH54/uohouho-1.png',
       productAiHint: 'fashion accessory',
