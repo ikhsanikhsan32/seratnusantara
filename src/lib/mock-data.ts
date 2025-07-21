@@ -595,12 +595,12 @@ export type Category = {
 };
 
 export const categories: Category[] = [
-  { id: '1', name: 'Clothing', slug: 'clothing', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'clothing rack' },
-  { id: '2', name: 'Accessories', slug: 'accessories', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'watches belts' },
-  { id: '3', name: 'Footwear', slug: 'footwear', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'sneakers shoes' },
-  { id: '4', name: 'Bags', slug: 'bags', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'handbags' },
-  { id: '5', name: 'Jewelry', slug: 'jewelry', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'necklaces rings' },
-  { id: '6', name: 'Home decor', slug: 'home-decor', imageUrl: 'https://placehold.co/400x300.png', aiHint: 'home decor' },
+  { id: '1', name: 'Clothing', slug: 'clothing', imageUrl: 'https://i.ibb.co/kVHnw1R0/1.png', aiHint: 'clothing rack' },
+  { id: '2', name: 'Accessories', slug: 'accessories', imageUrl: 'https://i.ibb.co/dwCjHMpr/2.png', aiHint: 'watches belts' },
+  { id: '3', name: 'Footwear', slug: 'footwear', imageUrl: 'https://i.ibb.co/5g4180Wd/5.png', aiHint: 'sneakers shoes' },
+  { id: '4', name: 'Bags', slug: 'bags', imageUrl: 'https://i.ibb.co/4w1Skzk6/3.png', aiHint: 'handbags' },
+  { id: '5', name: 'Jewelry', slug: 'jewelry', imageUrl: 'https://i.ibb.co/nh0pf3s/4.png', aiHint: 'necklaces rings' },
+  { id: '6', name: 'Home decor', slug: 'home-decor', imageUrl: 'https://i.ibb.co/8g60b4wL/uohouho-400-x-300-piksel.png', aiHint: 'home decor' },
 ];
 
 export type BlogPost = {
