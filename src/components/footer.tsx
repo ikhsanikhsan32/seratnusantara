@@ -41,17 +41,12 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
+          {/* NusaLoyalty Section */}
           <div>
-            <h3 className="font-headline font-semibold">Newsletter</h3>
-            <p className="mt-4 text-sm text-muted-foreground">Stay up to date with our latest news and offers.</p>
-            <form className="mt-4 flex gap-2">
-              <Input type="email" placeholder="Your email" className="flex-1" />
-              <Button type="submit" size="icon" className="bg-primary hover:bg-primary/90">
-                <span className="sr-only">Subscribe</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><path d="m3 3 3 9-3 9 19-9Z"/><path d="m6 12h16"/></svg>
-              </Button>
-            </form>
+            <h3 className="font-headline font-semibold">NusaLoyalty</h3>
+            <p className="mt-4 text-sm text-muted-foreground">
+              NusaLoyalty adalah program keanggotaan berjenjang dari SeratNusantara yang memberikan berbagai keuntungan eksklusif bagi pengguna setia yang aktif bertransaksi, berdonasi, atau mengikuti aktivitas di platform. Semakin sering Anda berbelanja atau berkontribusi, semakin tinggi level Anda dan semakin banyak benefitnya, seperti voucher gratis ongkir dan diskon.
+            </p>
           </div>
         </div>
         
