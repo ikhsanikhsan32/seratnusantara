@@ -127,7 +127,7 @@ export default function Home() {
                         className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90"
                         size="lg"
                       >
-                        <Link href={slide.buttonLink}>
+                        <Link href={slide.buttonLink} target="_blank" rel="noopener noreferrer">
                           {slide.buttonText} <ArrowRight className="ml-2" />
                         </Link>
                       </Button>
