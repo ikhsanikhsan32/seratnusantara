@@ -19,6 +19,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Star } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 // Helper to format number with dots
 const formatNumber = (num: number): string => {
@@ -33,6 +34,7 @@ const parseFormattedNumber = (str: string): number => {
 export default function ShopPage() {
   const [maxPrice, setMaxPrice] = useState<number | ''>('');
   const [displayPrice, setDisplayPrice] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value.replace(/\./g, '');
@@ -43,12 +45,36 @@ export default function ShopPage() {
     }
   };
 
+  const handleCategoryChange = (categorySlug: string) => {
+    setSelectedCategory(prev => (prev === categorySlug ? null : categorySlug));
+  };
+  
+  const resetFilters = () => {
+    setMaxPrice('');
+    setDisplayPrice('');
+    setSelectedCategory(null);
+  };
+
   const filteredProducts = useMemo(() => {
-    if (maxPrice === '' || maxPrice <= 0) {
-      return allProducts;
+    let products = allProducts;
+
+    if (maxPrice !== '' && maxPrice > 0) {
+      products = products.filter(product => product.price <= maxPrice);
     }
-    return allProducts.filter(product => product.price <= maxPrice);
-  }, [maxPrice]);
+
+    if (selectedCategory) {
+      products = products.filter(product => product.category === categories.find(c => c.slug === selectedCategory)?.name);
+    }
+    
+    return products;
+  }, [maxPrice, selectedCategory]);
+
+  const displayedCategories = useMemo(() => {
+    if (selectedCategory) {
+      return categories.filter(c => c.slug === selectedCategory);
+    }
+    return categories;
+  }, [selectedCategory]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -63,17 +89,22 @@ export default function ShopPage() {
         {/* Filters Sidebar */}
         <aside className="lg:col-span-1">
           <Card>
-            <CardHeader>
+            <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="font-headline text-lg">Filters</CardTitle>
+              <Button variant="ghost" size="sm" onClick={resetFilters}>Reset</Button>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Category Filter */}
               <div>
                 <h3 className="font-semibold">Category</h3>
                 <div className="mt-4 space-y-2">
-                  {categories.map((category) => (
+                  {displayedCategories.map((category) => (
                     <div key={category.id} className="flex items-center space-x-2">
-                      <Checkbox id={`cat-${category.id}`} />
+                      <Checkbox
+                        id={`cat-${category.id}`}
+                        checked={selectedCategory === category.slug}
+                        onCheckedChange={() => handleCategoryChange(category.slug)}
+                      />
                       <Label htmlFor={`cat-${category.id}`}>{category.name}</Label>
                     </div>
                   ))}

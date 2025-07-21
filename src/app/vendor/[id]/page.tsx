@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { ProductCard } from '@/components/product-card';
+import { Button } from '@/components/ui/button';
 
 // Helper to format number with dots
 const formatNumber = (num: number): string => {
@@ -25,6 +26,17 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
 
   const [maxPrice, setMaxPrice] = useState<number | ''>('');
   const [displayPrice, setDisplayPrice] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const vendorProducts = useMemo(() => {
+    return products.filter(p => p.vendorId === vendor.id);
+  }, [vendor.id]);
+
+  const vendorCategories = useMemo(() => {
+    return [...new Set(vendorProducts.map(p => p.category))]
+      .map(catName => categories.find(c => c.name === catName))
+      .filter((c): c is NonNullable<typeof c> => c !== undefined && c !== null);
+  }, [vendorProducts]);
 
   const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value.replace(/\./g, '');
@@ -35,18 +47,36 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
     }
   };
 
-  const vendorProducts = useMemo(() => {
-    return products.filter(p => p.vendorId === vendor.id);
-  }, [vendor.id]);
+  const handleCategoryChange = (categorySlug: string) => {
+    setSelectedCategory(prev => (prev === categorySlug ? null : categorySlug));
+  };
 
+  const resetFilters = () => {
+    setMaxPrice('');
+    setDisplayPrice('');
+    setSelectedCategory(null);
+  };
+  
   const filteredProducts = useMemo(() => {
-    if (maxPrice === '' || maxPrice <= 0) {
-      return vendorProducts;
+    let productsToFilter = vendorProducts;
+    
+    if (maxPrice !== '' && maxPrice > 0) {
+      productsToFilter = productsToFilter.filter(product => product.price <= maxPrice);
     }
-    return vendorProducts.filter(product => product.price <= maxPrice);
-  }, [vendorProducts, maxPrice]);
 
-  const vendorCategories = [...new Set(vendorProducts.map(p => p.category))].map(catName => categories.find(c => c.name === catName)).filter(Boolean);
+    if (selectedCategory) {
+      productsToFilter = productsToFilter.filter(product => product.category === categories.find(c => c.slug === selectedCategory)?.name);
+    }
+
+    return productsToFilter;
+  }, [vendorProducts, maxPrice, selectedCategory]);
+  
+  const displayedCategories = useMemo(() => {
+    if (selectedCategory) {
+      return vendorCategories.filter(c => c.slug === selectedCategory);
+    }
+    return vendorCategories;
+  }, [vendorCategories, selectedCategory]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -70,8 +100,9 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
         {/* Filters Sidebar */}
         <aside className="lg:col-span-1">
           <Card>
-            <CardHeader>
+            <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="font-headline text-lg">Filter Products</CardTitle>
+              <Button variant="ghost" size="sm" onClick={resetFilters}>Reset</Button>
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Category Filter */}
@@ -79,9 +110,13 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
                 <div>
                   <h3 className="font-semibold">Category</h3>
                   <div className="mt-4 space-y-2">
-                    {vendorCategories.map((category) => category && (
+                    {displayedCategories.map((category) => (
                       <div key={category.id} className="flex items-center space-x-2">
-                        <Checkbox id={`cat-${category.id}`} />
+                        <Checkbox
+                          id={`cat-${category.id}`}
+                          checked={selectedCategory === category.slug}
+                          onCheckedChange={() => handleCategoryChange(category.slug)}
+                        />
                         <Label htmlFor={`cat-${category.id}`}>{category.name}</Label>
                       </div>
                     ))}
@@ -119,7 +154,7 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
              <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-border p-12 text-center h-full">
               <h2 className="mt-6 font-headline text-xl font-semibold">No products found</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                No products match the selected price range.
+                No products match the selected filters.
               </p>
             </div>
           )}
