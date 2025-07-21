@@ -29,7 +29,7 @@ function formatPrice(price: number) {
 }
 
 export default function ShopPage() {
-  const [priceRange, setPriceRange] = useState([50000000]);
+  const [priceRange, setPriceRange] = useState([10000000]);
 
   const filteredProducts = useMemo(() => {
     return allProducts.filter(product => product.price <= priceRange[0]);
@@ -71,8 +71,8 @@ export default function ShopPage() {
                 <Slider
                   value={priceRange}
                   onValueChange={setPriceRange}
-                  max={100000000}
-                  step={500000}
+                  max={10000000}
+                  step={100000}
                   className="mt-4"
                 />
                 <div className="mt-2 flex justify-between text-sm text-muted-foreground">

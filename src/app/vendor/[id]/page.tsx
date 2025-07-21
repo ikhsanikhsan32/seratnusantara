@@ -26,7 +26,7 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
     notFound();
   }
 
-  const [priceRange, setPriceRange] = useState([50000000]);
+  const [priceRange, setPriceRange] = useState([10000000]);
 
   const vendorProducts = useMemo(() => {
     return products.filter(p => p.vendorId === vendor.id);
@@ -85,8 +85,8 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
                 <Slider
                   value={priceRange}
                   onValueChange={setPriceRange}
-                  max={100000000}
-                  step={500000}
+                  max={10000000}
+                  step={100000}
                   className="mt-4"
                 />
                 <div className="mt-2 flex justify-between text-sm text-muted-foreground">
