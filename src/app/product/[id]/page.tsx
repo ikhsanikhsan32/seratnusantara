@@ -114,6 +114,21 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     }
   }, [carouselApi, product?.id]);
 
+  const handleVariantHover = useCallback((variantName: string) => {
+    if (carouselApi && product?.id === '13' && product.variants?.name === 'Model') {
+        const modelMap: Record<string, number> = {
+            'Tote Bag': 0,
+            'Sling Bag': 1,
+            'Shoulder Bag': 2
+        };
+        const slideIndex = modelMap[variantName];
+        if (slideIndex !== undefined) {
+            carouselApi.scrollTo(slideIndex, false);
+        }
+    }
+  }, [carouselApi, product]);
+
+
   const handleAddToCart = () => {
     if (!product) return;
     const optionText = Object.entries(selectedOptions).map(([key, value]) => `${key}: ${value}`).join(', ');
@@ -228,7 +243,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                       <RadioGroupItem value={variant.id} id={`variant-${variant.id}`} className="peer sr-only" />
                       <Label
                         htmlFor={`variant-${variant.id}`}
-                        onMouseEnter={() => { if(product.id === '9') handleOptionChange('Ukuran', variant.name) }}
+                        onMouseEnter={() => {
+                          if (product.id === '9') handleOptionChange('Ukuran', variant.name);
+                          else if (product.id === '13') handleVariantHover(variant.name);
+                        }}
                         className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                       >
                         <span>{variant.name}</span>
