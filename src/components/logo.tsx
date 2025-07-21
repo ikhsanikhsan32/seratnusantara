@@ -5,7 +5,7 @@ export function Logo({ className }: { className?: string }) {
   return (
     <div className={cn("flex items-center", className)}>
        <Image
-          src="https://storage.googleapis.com/project-os-prod/images/4096053f-c387-43f1-b1e0-f1d24f08e09e.png"
+          src="https://i.ibb.co/qMkr345W/Desain-tanpa-judul-15.png"
           alt="Serat Nusantara Logo"
           width={150}
           height={38}
