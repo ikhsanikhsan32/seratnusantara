@@ -1,7 +1,8 @@
 
 "use client";
 
-import { useState, useMemo, ChangeEvent } from 'react';
+import { useState, useMemo, ChangeEvent, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { ProductCard } from '@/components/product-card';
 import { products as allProducts, categories } from '@/lib/mock-data';
 import {
@@ -27,9 +28,20 @@ const formatNumber = (num: number): string => {
 };
 
 export default function ShopPage() {
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams.get('category');
+
   const [maxPrice, setMaxPrice] = useState<number | ''>('');
   const [displayPrice, setDisplayPrice] = useState<string>('');
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(initialCategory ? [initialCategory] : []);
+
+  useEffect(() => {
+    const categoryFromUrl = searchParams.get('category');
+    if (categoryFromUrl && !selectedCategories.includes(categoryFromUrl)) {
+      setSelectedCategories([categoryFromUrl]);
+    }
+  }, [searchParams, selectedCategories]);
+
 
   const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
     const rawValue = e.target.value.replace(/\./g, '');
