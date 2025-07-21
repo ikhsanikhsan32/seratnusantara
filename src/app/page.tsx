@@ -57,7 +57,7 @@ export default function Home() {
     },
     {
       title: 'Potensi Marina yang Terlupakan',
-      description: 'Explore cutting-edge gadgets that redefine your world.',
+      description: 'Masuki dunia inspiratif para pelaku ekonomi kreatif di pesisir utara, kita diajak melihat bagaimana limbah cangkang kerang yang biasanya terbuang diolah menjadi kerajinan bernilai tinggi: mulai dari dekorasi rumah, aksesori, hingga produk fungsional. Penuh detail proses kreatif yang apik, video ini memotret dengan dekat perjuangan, teknik tradisional, dan semangat inovasi masyarakat pesisir.',
       bgImageUrl: 'https://i.ibb.co/tTYXpQR7/Frame-1-14.png',
       bgAiHint: 'modern gadgets',
       productImageUrl: 'https://i.ibb.co/nNY3YG1m/uohouho-2.png',
