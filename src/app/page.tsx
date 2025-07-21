@@ -119,7 +119,7 @@ export default function Home() {
                       <h1 className="font-headline text-4xl font-bold md:text-6xl">
                         {slide.title}
                       </h1>
-                      <p className="mt-4 max-w-lg text-lg">
+                      <p className="mt-4 max-w-lg text-lg text-justify">
                         {slide.description}
                       </p>
                       <Button
