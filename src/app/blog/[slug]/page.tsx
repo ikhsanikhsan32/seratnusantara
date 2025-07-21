@@ -23,7 +23,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <div className="mt-4 flex items-center space-x-4 text-muted-foreground">
             <div className="flex items-center space-x-2">
               <Avatar className="h-8 w-8">
-                <AvatarImage src={`https://i.pravatar.cc/40?u=${post.author}`} />
+                <AvatarImage src={post.authorImageUrl ?? `https://i.pravatar.cc/40?u=${post.author}`} />
                 <AvatarFallback>{post.author.charAt(0)}</AvatarFallback>
               </Avatar>
               <span>{post.author}</span>
