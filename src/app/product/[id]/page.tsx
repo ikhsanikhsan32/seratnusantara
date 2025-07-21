@@ -100,16 +100,6 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             if (slideIndex !== undefined) {
                 carouselApi.scrollTo(slideIndex, false);
             }
-        } else if (optionName === 'Ukuran' && product?.id === '9') { // Specific logic for Pot Sawit
-            const sizeMap: Record<string, number> = {
-                'Besar': 1,
-                'Sedang': 2,
-                'Kecil': 3
-            };
-            const slideIndex = sizeMap[value];
-            if (slideIndex !== undefined) {
-                carouselApi.scrollTo(slideIndex, false);
-            }
         }
     }
   }, [carouselApi, product?.id]);
@@ -254,8 +244,9 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                       <Label
                         htmlFor={`variant-${variant.id}`}
                         onMouseEnter={() => {
-                          if (product.id === '9') handleOptionChange('Ukuran', variant.name);
-                          else handleVariantHover(variant.name);
+                          if (product.variants?.name !== 'Ukuran') {
+                            handleVariantHover(variant.name);
+                          }
                         }}
                         className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                       >
@@ -281,7 +272,11 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                       <RadioGroupItem value={value} id={`${option.id}-${value}`} className="peer sr-only" />
                       <Label
                         htmlFor={`${option.id}-${value}`}
-                        onMouseEnter={() => handleOptionChange(option.name, value)}
+                        onMouseEnter={() => {
+                          if (option.name !== 'Ukuran') {
+                            handleOptionChange(option.name, value)
+                          }
+                        }}
                         className="flex items-center justify-center rounded-md border-2 border-muted bg-popover px-4 py-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                       >
                         {value}
