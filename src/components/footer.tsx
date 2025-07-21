@@ -47,6 +47,9 @@ export function Footer() {
             <p className="mt-4 text-sm text-muted-foreground">
               Nusa-Share – Fitur donasi dan jual-beli pakaian bekas yang masih layak pakai. Pengguna dapat mendonasikan atau menjual pakaian bekas mereka melalui SeratNusantara, yang kemudian akan disaring dan dikurasi untuk memastikan kualitas bahan yang masih dapat diolah kembali. Pakaian yang memenuhi standar akan diproses menjadi produk baru bernilai lebih tinggi atau diberikan kepada mitra yang tepat.
             </p>
+            <Button asChild className="mt-4 bg-accent text-accent-foreground hover:bg-accent/90">
+                <Link href="/nusa-share">Donasi Sekarang</Link>
+            </Button>
           </div>
         </div>
         
