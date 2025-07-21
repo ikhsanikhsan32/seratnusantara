@@ -74,7 +74,7 @@ export default function Home() {
       description: 'Limbah tandan kosong kelapa sawit (TKKS) ternyata menyimpan potensi besar untuk diolah menjadi bahan tekstil ramah lingkungan yang kuat, tahan lama, dan biodegradable. Dari limbah menjadi kain, lalu berubah menjadi tas, sepatu, hingga aksesori fashion, inovasi ini tidak hanya mengurangi pencemaran tetapi juga membuka peluang kolaborasi antara petani, industri, dan desainer lokal mewujudkan gaya yang berpihak pada bumi.',
       bgImageUrl: 'https://i.ibb.co/kVTLdbx2/Frame-1-16.png',
       bgAiHint: 'living room decor',
-      productImageUrl: 'https://placehold.co/400x500.png',
+      productImageUrl: 'https://i.ibb.co/YBkz1c0W/uohouho-3.png',
       productAiHint: 'decorative lamp',
       buttonText: 'Decorate Your Home',
       buttonLink: '/shop?category=home',
