@@ -62,8 +62,8 @@ export default function Home() {
       bgAiHint: 'modern gadgets',
       productImageUrl: 'https://i.ibb.co/nNY3YG1m/uohouho-2.png',
       productAiHint: 'smart watch',
-      buttonText: 'Explore Gadgets',
-      buttonLink: '/shop?category=electronics',
+      buttonText: 'Selengkapnya',
+      buttonLink: 'https://youtu.be/LvjrbFRXMPw?si=BMiX-ooO9Cjz1_tu',
     },
     {
       title: 'Cozy Home Essentials',
