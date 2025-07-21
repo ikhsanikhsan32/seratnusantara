@@ -490,9 +490,9 @@ export const products: Product[] = [
   },
   {
     id: '30',
-    name: 'PUKA Wonder Watch Jam Tangan Lucu Manik-manik Wanita handmade',
+    name: 'PUKA Outer Backhome Pink - All Size',
     price: 225000,
-    category: 'Accessories',
+    category: 'Clothing',
     rating: 4.8,
     imageUrl: 'https://i.ibb.co/bjQd1xXV/Screenshot-2025-07-21-074808.png',
     imageUrls: [
@@ -501,7 +501,7 @@ export const products: Product[] = [
     description: 'Outer Backhome dengan ilustrasi buatan Nabila ilustrator istimewa 😍\n\nCARA PERAWATAN : \nWash Machine\n\nDISCLAIMER:\nWarna produk pada gambar mungkin tidak 100% sama dengan produk fisik, karena proses pencahayaan pada pengambilan gambar atau kualitas layar gadget yang digunakan untuk melihat gambar.',
     availability: 'In Stock',
     reviews: 12,
-    aiHint: 'beaded watch handmade',
+    aiHint: 'outerwear clothing',
     vendorId: 'vendor-3',
     options: [{
         id: 'wonder-watch-size',
