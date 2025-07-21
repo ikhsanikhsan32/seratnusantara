@@ -103,9 +103,9 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         }
         if (product?.id === '15' && optionName === 'Model') {
             const modelMap: Record<string, number> = {
-                'Model A': 1, 
-                'Model B': 1, 
-                'Model C': 2
+                'Model A': 0,
+                'Model B': 1,
+                'Model C': 2,
             };
             const slideIndex = modelMap[value];
             if (slideIndex !== undefined) {
