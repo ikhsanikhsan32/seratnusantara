@@ -95,6 +95,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 'Night': 1, 'Day': 2,
                 'Ocean': 0, 'Alice': 1, 'Playfull': 2, 'Lissi': 3,
                 'Green': 1, 'Orange': 2, 'Yellow': 3,
+                'Abu-Abu': 0, 
             };
             const slideIndex = colorMap[value];
             if (slideIndex !== undefined) {

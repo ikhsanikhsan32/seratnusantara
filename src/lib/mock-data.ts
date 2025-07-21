@@ -509,6 +509,28 @@ export const products: Product[] = [
         values: ['S', 'M', 'L', 'XL', 'XXL'],
     }],
   },
+  {
+    id: '31',
+    name: 'Susbag Hoodie',
+    price: 110000,
+    category: 'Bags',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/pjCLM6TS/IMG-20241029-WA0008.jpg',
+    imageUrls: [
+      'https://i.ibb.co/pjCLM6TS/IMG-20241029-WA0008.jpg',
+      'https://i.ibb.co/20B7Gpzx/IMG-20241206-144852.jpg',
+    ],
+    description: 'Size: 42×33 cm\nMaterial: Secondhand Hoodie\nFeatures: 1 small pocket di depan tas 2 Tumbler pocket kiri dan kanan tas.\n\n! Produk kami dibuat dari bahan secondhand hoodie, sehingga setiap tas memiliki keunikan tersendiri. Warna barang yang datang mungkin terdapat perbedaan dengan katalog, tapi tidak akan jauh berbeda.',
+    availability: 'In Stock',
+    reviews: 42,
+    aiHint: 'hoodie bag',
+    vendorId: 'vendor-4',
+    options: [{
+      id: 'susbag-hoodie-color',
+      name: 'Warna',
+      values: ['Abu-Abu', 'Hitam'],
+    }],
+  },
 ];
 
 export type Category = {
