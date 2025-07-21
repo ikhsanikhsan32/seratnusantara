@@ -596,10 +596,10 @@ export type Category = {
 
 export const categories: Category[] = [
   { id: '1', name: 'Clothing', slug: 'clothing', imageUrl: 'https://i.ibb.co/B2pFzFdp/2.png', aiHint: 'clothing rack' },
-  { id: '2', name: 'Accessories', slug: 'accessories', imageUrl: 'https://i.ibb.co/dwCjHMpr/2.png', aiHint: 'watches belts' },
-  { id: '3', name: 'Footwear', slug: 'footwear', imageUrl: 'https://i.ibb.co/5g4180Wd/5.png', aiHint: 'sneakers shoes' },
+  { id: '2', name: 'Accessories', slug: 'accessories', imageUrl: 'https://i.ibb.co/gb9CzVpj/3.png', aiHint: 'watches belts' },
+  { id: '3', name: 'Footwear', slug: 'footwear', imageUrl: 'https://i.ibb.co/kVHnw1R0/1.png', aiHint: 'sneakers shoes' },
   { id: '4', name: 'Bags', slug: 'bags', imageUrl: 'https://i.ibb.co/DDZqzh5r/4.png', aiHint: 'handbags' },
-  { id: '5', name: 'Jewelry', slug: 'jewelry', imageUrl: 'https://i.ibb.co/4w1Skzk6/3.png', aiHint: 'necklaces rings' },
+  { id: '5', name: 'Jewelry', slug: 'jewelry', imageUrl: 'https://i.ibb.co/dwG1Z3Lb/6.png', aiHint: 'necklaces rings' },
   { id: '6', name: 'Home decor', slug: 'home-decor', imageUrl: 'https://i.ibb.co/8g60b4wL/uohouho-400-x-300-piksel.png', aiHint: 'home decor' },
 ];
 
