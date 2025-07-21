@@ -47,7 +47,6 @@ export type Product = {
 
 export const products: Product[] = [
   { id: '2', name: 'Wireless Noise-Cancelling Headphones', price: 2499000, category: 'Accessories', rating: 4.8, imageUrl: 'https://placehold.co/600x600.png', description: 'Immerse yourself in sound with these premium headphones.', availability: 'In Stock', reviews: 250, aiHint: 'headphones', vendorId: 'vendor-1' },
-  { id: '7', name: 'Leather Tote Bag', price: 799000, category: 'Bags', rating: 4.7, imageUrl: 'https://placehold.co/600x600.png', description: 'A stylish and spacious bag for your essentials.', availability: 'In Stock', reviews: 180, aiHint: 'leather bag', vendorId: 'vendor-4' },
   // Green Fast Sawit Products
   {
     id: '9',
@@ -491,7 +490,7 @@ export const products: Product[] = [
   {
     id: '30',
     name: 'PUKA Outer Backhome Pink - All Size',
-    price: 225000,
+    price: 75000,
     category: 'Clothing',
     rating: 4.8,
     imageUrl: 'https://i.ibb.co/bjQd1xXV/Screenshot-2025-07-21-074808.png',
