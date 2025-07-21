@@ -102,9 +102,9 @@ export default {
         },
         'fade-in-left-then-float': {
           '0%': { opacity: '0', transform: 'translateX(-20px) translateY(0px)' },
-          '20%': { opacity: '1', transform: 'translateX(0px) translateY(0px)' }, // Fade in complete
-          '60%': { transform: 'translateX(0px) translateY(-20px)' }, // Float up
-          '100%': { transform: 'translateX(0px) translateY(0px)' }, // Float down
+          '20%': { opacity: '1', transform: 'translateX(0px) translateY(0px)' },
+          '60%': { opacity: '1', transform: 'translateX(0px) translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0px) translateY(0px)' },
         }
       },
       animation: {
