@@ -56,7 +56,7 @@ export default function Home() {
       buttonLink: 'https://youtu.be/tZh7lBC_Z7o?si=ee0KbHIfiAs1q7ny',
     },
     {
-      title: 'Latest in Electronics',
+      title: 'Potensi Marina yang Terlupakan',
       description: 'Explore cutting-edge gadgets that redefine your world.',
       bgImageUrl: 'https://i.ibb.co/tTYXpQR7/Frame-1-14.png',
       bgAiHint: 'modern gadgets',
