@@ -92,11 +92,16 @@ export default function Home() {
           <CarouselContent>
             {heroSlides.map((slide, index) => (
               <CarouselItem key={index}>
-                <div
-                  className="relative h-[70vh] md:h-[80vh] w-full bg-cover bg-center"
-                  style={{ backgroundImage: `url('${slide.bgImageUrl}')` }}
-                >
-                  <div className="absolute inset-0 bg-black/50" data-ai-hint={slide.bgAiHint} />
+                <div className="relative h-[70vh] md:h-[80vh] w-full">
+                  <Image
+                    src={slide.bgImageUrl}
+                    alt={slide.title}
+                    fill
+                    className="object-cover"
+                    data-ai-hint={slide.bgAiHint}
+                    priority={index === 0}
+                  />
+                  <div className="absolute inset-0 bg-black/50" />
                   <div className="relative z-10 container mx-auto px-4 h-full grid grid-cols-1 md:grid-cols-2 items-center">
                     <div className="hidden md:flex justify-start items-center h-full">
                        <div key={`image-${currentSlide}`} className="relative w-3/4 h-3/4 animate-fade-in-left">
