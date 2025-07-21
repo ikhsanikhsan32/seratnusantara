@@ -49,6 +49,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   const { toast } = useToast();
   
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [selectedRating, setSelectedRating] = useState<number>(0); // 0 for 'Semua'
 
   const product = useMemo(() => products.find((p) => p.id === params.id), [params.id]);
   const vendor = useMemo(() => vendors.find(v => v.id === product?.vendorId), [product]);
@@ -214,12 +215,28 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     });
   };
 
+  const filteredReviews = useMemo(() => {
+    if (!product?.customerReviews) return [];
+    if (selectedRating === 0) {
+        return product.customerReviews;
+    }
+    return product.customerReviews.filter(review => review.rating === selectedRating);
+  }, [product?.customerReviews, selectedRating]);
+
   if (!product || !vendor) {
     notFound();
   }
 
   const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
   const images = product.imageUrls && product.imageUrls.length > 0 ? product.imageUrls : [product.imageUrl];
+  
+  const ratingCounts: {[key: number]: number} = {
+    5: product.customerReviews?.filter(r => r.rating === 5).length ?? 0,
+    4: product.customerReviews?.filter(r => r.rating === 4).length ?? 0,
+    3: product.customerReviews?.filter(r => r.rating === 3).length ?? 0,
+    2: product.customerReviews?.filter(r => r.rating === 2).length ?? 0,
+    1: product.customerReviews?.filter(r => r.rating === 1).length ?? 0,
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -428,19 +445,19 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                             </div>
                         </div>
                         <div className="mt-4 flex flex-wrap gap-2 sm:ml-auto sm:mt-0">
-                            <Button variant="outline" size="sm" className="bg-background border-primary text-primary">Semua</Button>
-                            <Button variant="outline" size="sm">5 Bintang ({product.customerReviews?.filter(r => r.rating === 5).length ?? 0})</Button>
-                            <Button variant="outline" size="sm">4 Bintang ({product.customerReviews?.filter(r => r.rating === 4).length ?? 0})</Button>
-                            <Button variant="outline" size="sm">3 Bintang ({product.customerReviews?.filter(r => r.rating === 3).length ?? 0})</Button>
-                            <Button variant="outline" size="sm">2 Bintang ({product.customerReviews?.filter(r => r.rating === 2).length ?? 0})</Button>
-                            <Button variant="outline" size="sm">1 Bintang ({product.customerReviews?.filter(r => r.rating === 1).length ?? 0})</Button>
+                            <Button variant="outline" size="sm" onClick={() => setSelectedRating(0)} className={selectedRating === 0 ? 'bg-background border-primary text-primary' : ''}>Semua</Button>
+                            {[5, 4, 3, 2, 1].map(rating => (
+                                <Button key={rating} variant="outline" size="sm" onClick={() => setSelectedRating(rating)} className={selectedRating === rating ? 'bg-background border-primary text-primary' : ''}>
+                                    {rating} Bintang ({ratingCounts[rating]})
+                                </Button>
+                            ))}
                         </div>
                     </div>
                 </div>
 
                 <div className="mt-8 space-y-8">
-                    {product.customerReviews && product.customerReviews.length > 0 ? (
-                        product.customerReviews.map(review => (
+                    {filteredReviews && filteredReviews.length > 0 ? (
+                        filteredReviews.map(review => (
                             <div key={review.id} className="flex gap-4">
                                 <Avatar>
                                     <AvatarImage src={review.avatarUrl} />
