@@ -2,10 +2,10 @@
 "use client";
 
 import Image from 'next/image';
-import { products } from '@/lib/mock-data';
+import { products, vendors } from '@/lib/mock-data';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import {
   Carousel,
@@ -15,7 +15,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
-import { Star, Heart, ShoppingCart, Minus, Plus, CheckCircle } from 'lucide-react';
+import { Star, Heart, ShoppingCart, Minus, Plus, CheckCircle, MessageSquare, Store as StoreIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { ProductCard } from '@/components/product-card';
 import { useState, useMemo, useEffect, useCallback } from 'react';
@@ -24,6 +24,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useStore, CartItem } from '@/context/store-context';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 function formatPrice(price: number) {
     return new Intl.NumberFormat('id-ID', {
@@ -50,6 +51,9 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
   const product = useMemo(() => products.find((p) => p.id === params.id), [params.id]);
+  const vendor = useMemo(() => vendors.find(v => v.id === product?.vendorId), [product]);
+  const vendorProductsCount = useMemo(() => products.filter(p => p.vendorId === vendor?.id).length, [vendor]);
+
 
   const [quantity, setQuantity] = useState(1);
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null);
@@ -109,6 +113,16 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 'Model C': 2,
             };
             const slideIndex = modelMap[value];
+            if (slideIndex !== undefined) {
+                carouselApi.scrollTo(slideIndex, false);
+            }
+        }
+         if (product?.id === '31' && optionName === 'Warna') {
+            const colorMap: Record<string, number> = {
+                'Abu-Abu': 0,
+                'Hitam': 1,
+            };
+            const slideIndex = colorMap[value];
             if (slideIndex !== undefined) {
                 carouselApi.scrollTo(slideIndex, false);
             }
@@ -196,7 +210,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     });
   };
 
-  if (!product) {
+  if (!product || !vendor) {
     notFound();
   }
 
@@ -349,6 +363,48 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         </div>
       </div>
       
+       {/* Vendor Info Card */}
+      <Card className="mt-12">
+        <CardContent className="p-6">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <Avatar className="h-20 w-20 border">
+                  <AvatarImage src={vendor.logoUrl} alt={`${vendor.name} logo`} />
+                  <AvatarFallback>{vendor.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+                <Badge className="absolute -bottom-2 -right-2 border-2 border-card bg-accent text-accent-foreground">Star</Badge>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold">{vendor.name}</h3>
+                <p className="text-sm text-muted-foreground">Aktif 1 Jam Lalu</p>
+                <div className="mt-2 flex gap-2">
+                  <Button variant="outline" size="sm">
+                    <MessageSquare className="mr-2 h-4 w-4" /> Chat Sekarang
+                  </Button>
+                   <Button asChild variant="secondary" size="sm">
+                    <Link href={`/vendor/${vendor.id}`}>
+                      <StoreIcon className="mr-2 h-4 w-4" /> Kunjungi Toko
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-8 sm:ml-auto sm:text-right">
+              <div>
+                <p className="text-sm text-muted-foreground">Penilaian</p>
+                <p className="font-bold text-primary">{product.reviews * 5 + 100}</p> 
+              </div>
+               <div>
+                <p className="text-sm text-muted-foreground">Produk</p>
+                <p className="font-bold text-primary">{vendorProductsCount}</p>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+
       {/* Related Products */}
       <div className="mt-16">
         <h2 className="font-headline text-2xl font-bold">Related Products</h2>
