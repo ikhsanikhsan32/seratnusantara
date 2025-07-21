@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, ChangeEvent } from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { vendors, products, categories } from '@/lib/mock-data';
@@ -11,6 +11,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { ProductCard } from '@/components/product-card';
 
+// Helper to format number with dots
+const formatNumber = (num: number): string => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+};
+
 export default function VendorPublicPage({ params }: { params: { id: string } }) {
   const vendor = vendors.find((v) => v.id === params.id);
   
@@ -18,18 +23,27 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
     notFound();
   }
 
-  const [maxPrice, setMaxPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState<number | ''>('');
+  const [displayPrice, setDisplayPrice] = useState<string>('');
+
+  const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/\./g, '');
+    if (/^\d*$/.test(rawValue)) {
+      const numericValue = rawValue === '' ? '' : parseInt(rawValue, 10);
+      setMaxPrice(numericValue);
+      setDisplayPrice(numericValue === '' ? '' : formatNumber(numericValue));
+    }
+  };
 
   const vendorProducts = useMemo(() => {
     return products.filter(p => p.vendorId === vendor.id);
   }, [vendor.id]);
 
   const filteredProducts = useMemo(() => {
-    const price = parseFloat(maxPrice);
-    if (isNaN(price) || price <= 0) {
+    if (maxPrice === '' || maxPrice <= 0) {
       return vendorProducts;
     }
-    return vendorProducts.filter(product => product.price <= price);
+    return vendorProducts.filter(product => product.price <= maxPrice);
   }, [vendorProducts, maxPrice]);
 
   const vendorCategories = [...new Set(vendorProducts.map(p => p.category))].map(catName => categories.find(c => c.name === catName)).filter(Boolean);
@@ -78,13 +92,16 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
               {/* Price Filter */}
               <div>
                 <h3 className="font-semibold">Maximum Price</h3>
-                <Input
-                  type="number"
-                  placeholder="e.g., 500000"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                  className="mt-2"
-                />
+                 <div className="relative mt-2">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-muted-foreground">Rp</span>
+                  <Input
+                    type="text"
+                    placeholder="e.g. 500.000"
+                    value={displayPrice}
+                    onChange={handlePriceChange}
+                    className="pl-9"
+                  />
+                </div>
               </div>
             </CardContent>
           </Card>

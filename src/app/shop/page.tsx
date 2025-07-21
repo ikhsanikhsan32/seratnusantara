@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, ChangeEvent } from 'react';
 import { ProductCard } from '@/components/product-card';
 import { products as allProducts, categories } from '@/lib/mock-data';
 import {
@@ -20,15 +20,34 @@ import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Star } from 'lucide-react';
 
+// Helper to format number with dots
+const formatNumber = (num: number): string => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+};
+
+// Helper to parse formatted string to number
+const parseFormattedNumber = (str: string): number => {
+  return parseInt(str.replace(/\./g, ''), 10) || 0;
+};
+
 export default function ShopPage() {
-  const [maxPrice, setMaxPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState<number | ''>('');
+  const [displayPrice, setDisplayPrice] = useState<string>('');
+
+  const handlePriceChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/\./g, '');
+    if (/^\d*$/.test(rawValue)) {
+      const numericValue = rawValue === '' ? '' : parseInt(rawValue, 10);
+      setMaxPrice(numericValue);
+      setDisplayPrice(numericValue === '' ? '' : formatNumber(numericValue));
+    }
+  };
 
   const filteredProducts = useMemo(() => {
-    const price = parseFloat(maxPrice);
-    if (isNaN(price) || price <= 0) {
+    if (maxPrice === '' || maxPrice <= 0) {
       return allProducts;
     }
-    return allProducts.filter(product => product.price <= price);
+    return allProducts.filter(product => product.price <= maxPrice);
   }, [maxPrice]);
 
   return (
@@ -64,13 +83,16 @@ export default function ShopPage() {
               {/* Price Filter */}
               <div>
                 <h3 className="font-semibold">Maximum Price</h3>
-                <Input
-                  type="number"
-                  placeholder="e.g., 500000"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                  className="mt-2"
-                />
+                <div className="relative mt-2">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-muted-foreground">Rp</span>
+                  <Input
+                    type="text"
+                    placeholder="e.g. 500.000"
+                    value={displayPrice}
+                    onChange={handlePriceChange}
+                    className="pl-9"
+                  />
+                </div>
               </div>
 
               {/* Rating Filter */}
