@@ -125,6 +125,16 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         if (slideIndex !== undefined) {
             carouselApi.scrollTo(slideIndex, false);
         }
+    } else if (carouselApi && product?.id === '14' && product.variants?.name === 'Model') {
+        const modelMap: Record<string, number> = {
+            'Full Sawit': 0,
+            'Setengah Leather Pria': 1,
+            'Setengah Leather Wanita': 2
+        };
+        const slideIndex = modelMap[variantName];
+        if (slideIndex !== undefined) {
+            carouselApi.scrollTo(slideIndex, false);
+        }
     }
   }, [carouselApi, product]);
 
@@ -245,7 +255,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                         htmlFor={`variant-${variant.id}`}
                         onMouseEnter={() => {
                           if (product.id === '9') handleOptionChange('Ukuran', variant.name);
-                          else if (product.id === '13') handleVariantHover(variant.name);
+                          else handleVariantHover(variant.name);
                         }}
                         className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                       >
