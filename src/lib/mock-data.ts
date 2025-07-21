@@ -595,7 +595,7 @@ export type Category = {
 };
 
 export const categories: Category[] = [
-  { id: '1', name: 'Clothing', slug: 'clothing', imageUrl: 'https://i.ibb.co/kVHnw1R0/1.png', aiHint: 'clothing rack' },
+  { id: '1', name: 'Clothing', slug: 'clothing', imageUrl: 'https://i.ibb.co/B2pFzFdp/2.png', aiHint: 'clothing rack' },
   { id: '2', name: 'Accessories', slug: 'accessories', imageUrl: 'https://i.ibb.co/dwCjHMpr/2.png', aiHint: 'watches belts' },
   { id: '3', name: 'Footwear', slug: 'footwear', imageUrl: 'https://i.ibb.co/5g4180Wd/5.png', aiHint: 'sneakers shoes' },
   { id: '4', name: 'Bags', slug: 'bags', imageUrl: 'https://i.ibb.co/DDZqzh5r/4.png', aiHint: 'handbags' },
@@ -648,4 +648,6 @@ export const newsItems: NewsItem[] = [
 ];
 
     
+    
+
     
