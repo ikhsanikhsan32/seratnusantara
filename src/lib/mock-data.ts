@@ -647,7 +647,38 @@ export const newsItems: NewsItem[] = [
     { id: '4', text: 'Join our loyalty program and earn points on every purchase.' },
 ];
 
-    
-    
+export type LoyaltyTier = {
+    name: string;
+    points: number;
+    icon: 'Trophy' | 'Star' | 'Gem';
+    benefits: string[];
+    bgColor: string;
+    textColor: string;
+};
 
-    
+export const loyaltyTiers: LoyaltyTier[] = [
+    {
+        name: 'Serat Perunggu',
+        points: 0,
+        icon: 'Trophy',
+        benefits: ['Voucher diskon 5%', 'Akses awal ke produk baru', 'Poin ganda di hari ulang tahun'],
+        bgColor: 'bg-orange-100',
+        textColor: 'text-orange-800'
+    },
+    {
+        name: 'Serat Perak',
+        points: 5000,
+        icon: 'Star',
+        benefits: ['Semua keuntungan Perunggu', 'Voucher gratis ongkir bulanan', 'Diskon 10% untuk produk pilihan', 'Hadiah spesial'],
+        bgColor: 'bg-slate-200',
+        textColor: 'text-slate-800'
+    },
+    {
+        name: 'Serat Emas',
+        points: 15000,
+        icon: 'Gem',
+        benefits: ['Semua keuntungan Perak', 'Prioritas layanan pelanggan', 'Undangan ke acara eksklusif', 'Voucher diskon 15% setiap bulan'],
+        bgColor: 'bg-yellow-100',
+        textColor: 'text-yellow-800'
+    }
+];

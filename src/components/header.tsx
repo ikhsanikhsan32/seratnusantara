@@ -21,6 +21,7 @@ import { useStore } from "@/context/store-context";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
+  { href: "/loyalty", label: "Loyalty" },
   { href: "/blog", label: "Blog" },
   { href: "/support", label: "Support" },
 ];
