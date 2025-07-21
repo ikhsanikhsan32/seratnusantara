@@ -30,13 +30,14 @@ export default function Home() {
       return;
     }
 
-    setCurrentSlide(carouselApi.selectedScrollSnap());
-
     const onSelect = () => {
       setCurrentSlide(carouselApi.selectedScrollSnap());
     };
 
     carouselApi.on('select', onSelect);
+    // Set initial slide
+    setCurrentSlide(carouselApi.selectedScrollSnap());
+
 
     return () => {
       carouselApi.off('select', onSelect);
@@ -57,7 +58,7 @@ export default function Home() {
     {
       title: 'Latest in Electronics',
       description: 'Explore cutting-edge gadgets that redefine your world.',
-      bgImageUrl: 'https://i.ibb.co/k2gNNyP/Frame-1-13.png',
+      bgImageUrl: 'https://i.ibb.co/B2pC820M/Frame-1-13.png',
       bgAiHint: 'modern gadgets',
       productImageUrl: 'https://placehold.co/400x500.png',
       productAiHint: 'smart watch',
@@ -219,5 +220,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
