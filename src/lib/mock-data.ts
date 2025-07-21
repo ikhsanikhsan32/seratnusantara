@@ -70,9 +70,9 @@ export const products: Product[] = [
     variants: {
       name: 'Ukuran',
       options: [
-        { id: 'pot-large', name: 'Besar', price: 50000 },
-        { id: 'pot-medium', name: 'Sedang', price: 35000 },
         { id: 'pot-small', name: 'Kecil', price: 20000 },
+        { id: 'pot-medium', name: 'Sedang', price: 35000 },
+        { id: 'pot-large', name: 'Besar', price: 50000 },
       ],
     },
   },
@@ -82,8 +82,8 @@ export const products: Product[] = [
     price: 100000,
     category: 'Home decor',
     rating: 4.5,
-    imageUrl: 'https://placehold.co/600x600.png',
-    imageUrls: ['https://placehold.co/800x800.png'],
+    imageUrl: 'https://i.ibb.co/d0bN4jbj/CATALOGUE-GREEN-FAST-pptx-6.jpg',
+    imageUrls: ['https://i.ibb.co/d0bN4jbj/CATALOGUE-GREEN-FAST-pptx-6.jpg'],
     description: 'Digunakan sebagai filter penjernih air pada budidaya ikan hias/tawar.',
     availability: 'In Stock',
     reviews: 15,
