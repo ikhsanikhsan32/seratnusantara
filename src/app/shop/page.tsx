@@ -16,24 +16,20 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Slider } from '@/components/ui/slider';
+import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Star } from 'lucide-react';
 
-function formatPrice(price: number) {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    minimumFractionDigits: 0,
-  }).format(price);
-}
-
 export default function ShopPage() {
-  const [priceRange, setPriceRange] = useState([10000000]);
+  const [maxPrice, setMaxPrice] = useState('');
 
   const filteredProducts = useMemo(() => {
-    return allProducts.filter(product => product.price <= priceRange[0]);
-  }, [priceRange]);
+    const price = parseFloat(maxPrice);
+    if (isNaN(price) || price <= 0) {
+      return allProducts;
+    }
+    return allProducts.filter(product => product.price <= price);
+  }, [maxPrice]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -67,18 +63,14 @@ export default function ShopPage() {
 
               {/* Price Filter */}
               <div>
-                <h3 className="font-semibold">Price Range</h3>
-                <Slider
-                  value={priceRange}
-                  onValueChange={setPriceRange}
-                  max={10000000}
-                  step={100000}
-                  className="mt-4"
+                <h3 className="font-semibold">Maximum Price</h3>
+                <Input
+                  type="number"
+                  placeholder="e.g., 500000"
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                  className="mt-2"
                 />
-                <div className="mt-2 flex justify-between text-sm text-muted-foreground">
-                  <span>Rp 0</span>
-                  <span>{formatPrice(priceRange[0])}</span>
-                </div>
               </div>
 
               {/* Rating Filter */}

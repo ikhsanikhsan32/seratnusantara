@@ -8,16 +8,8 @@ import { vendors, products, categories } from '@/lib/mock-data';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Slider } from '@/components/ui/slider';
+import { Input } from '@/components/ui/input';
 import { ProductCard } from '@/components/product-card';
-
-function formatPrice(price: number) {
-  return new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
-    minimumFractionDigits: 0,
-  }).format(price);
-}
 
 export default function VendorPublicPage({ params }: { params: { id: string } }) {
   const vendor = vendors.find((v) => v.id === params.id);
@@ -26,15 +18,19 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
     notFound();
   }
 
-  const [priceRange, setPriceRange] = useState([10000000]);
+  const [maxPrice, setMaxPrice] = useState('');
 
   const vendorProducts = useMemo(() => {
     return products.filter(p => p.vendorId === vendor.id);
   }, [vendor.id]);
 
   const filteredProducts = useMemo(() => {
-    return vendorProducts.filter(product => product.price <= priceRange[0]);
-  }, [vendorProducts, priceRange]);
+    const price = parseFloat(maxPrice);
+    if (isNaN(price) || price <= 0) {
+      return vendorProducts;
+    }
+    return vendorProducts.filter(product => product.price <= price);
+  }, [vendorProducts, maxPrice]);
 
   const vendorCategories = [...new Set(vendorProducts.map(p => p.category))].map(catName => categories.find(c => c.name === catName)).filter(Boolean);
 
@@ -81,18 +77,14 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
 
               {/* Price Filter */}
               <div>
-                <h3 className="font-semibold">Price Range</h3>
-                <Slider
-                  value={priceRange}
-                  onValueChange={setPriceRange}
-                  max={10000000}
-                  step={100000}
-                  className="mt-4"
+                <h3 className="font-semibold">Maximum Price</h3>
+                <Input
+                  type="number"
+                  placeholder="e.g., 500000"
+                  value={maxPrice}
+                  onChange={(e) => setMaxPrice(e.target.value)}
+                  className="mt-2"
                 />
-                <div className="mt-2 flex justify-between text-sm text-muted-foreground">
-                  <span>Rp 0</span>
-                  <span>{formatPrice(priceRange[0])}</span>
-                </div>
               </div>
             </CardContent>
           </Card>
