@@ -90,8 +90,8 @@ export function ProductCard({ product }: ProductCardProps) {
             <Heart className={`h-4 w-4 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
           </Button>
         </div>
-        <div className="flex flex-1 flex-col p-4">
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
+        <div className="flex flex-1 flex-col bg-accent p-4 text-accent-foreground">
+          <div className="flex items-center justify-between text-sm text-accent-foreground/80">
             <span>{product.category}</span>
             <div className="flex items-center gap-1">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
@@ -99,20 +99,20 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
           </div>
           <h3 className="font-headline mt-2 truncate font-semibold">
-            <Link href={`/product/${product.id}`} className="hover:text-primary">
+            <Link href={`/product/${product.id}`} className="hover:text-accent-foreground/80">
               {product.name}
             </Link>
           </h3>
           {vendor && (
-            <Link href={`/vendor/${vendor.id}`} className="mt-1 text-xs text-muted-foreground hover:underline">
-              <Badge variant="secondary" className="font-normal">
+            <Link href={`/vendor/${vendor.id}`} className="mt-1 text-xs text-accent-foreground/80 hover:underline">
+              <Badge variant="secondary" className="bg-white/20 text-accent-foreground font-normal">
                 <Store className="mr-1 h-3 w-3" />
                 {vendor.name}
               </Badge>
             </Link>
           )}
           <div className="mt-4 flex flex-1 items-end justify-between">
-            <p className="text-lg font-bold text-primary">{formatPrice(product.price)}</p>
+            <p className="text-lg font-bold text-white">{formatPrice(product.price)}</p>
             <Button size="icon" className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 w-9" onClick={handleAddToCart} aria-label="Add to Cart">
               <ShoppingCart className="h-4 w-4" />
             </Button>
