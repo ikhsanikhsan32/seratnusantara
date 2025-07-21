@@ -1,3 +1,4 @@
+
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { vendors, products, categories } from '@/lib/mock-data';
@@ -61,10 +62,10 @@ export default function VendorPublicPage({ params }: { params: { id: string } })
               {/* Price Filter */}
               <div>
                 <h3 className="font-semibold">Price Range</h3>
-                <Slider defaultValue={[250]} max={500} step={1} className="mt-4" />
+                <Slider defaultValue={[25000000]} max={100000000} step={500000} className="mt-4" />
                 <div className="mt-2 flex justify-between text-sm text-muted-foreground">
-                  <span>$0</span>
-                  <span>$500+</span>
+                  <span>Rp 0</span>
+                  <span>Rp 100.000.000+</span>
                 </div>
               </div>
             </CardContent>
