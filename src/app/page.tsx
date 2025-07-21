@@ -21,7 +21,11 @@ import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 export default function Home() {
-  const featuredProducts = products.slice(0, 4);
+  const trendingProductIds = ['14', '28', '31', '30'];
+  const trendingProducts = trendingProductIds
+    .map(id => products.find(p => p.id === id))
+    .filter(p => p !== undefined) as (typeof products)[0][];
+
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -144,14 +148,14 @@ export default function Home() {
         </Carousel>
       </section>
 
-      {/* Featured Products Section */}
+      {/* Trending Products Section */}
       <section className="py-12 md:py-20">
         <div className="container mx-auto px-4">
           <h2 className="font-headline mb-8 text-center text-3xl font-bold">
-            Featured Products
+            🔥 Trending Products
           </h2>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredProducts.map((product) => (
+            {trendingProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
