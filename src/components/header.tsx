@@ -13,6 +13,7 @@ import {
   ShoppingCart,
   Heart,
   User,
+  HandHeart,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
@@ -69,6 +70,12 @@ export function Header() {
             </form>
           </div>
           <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" asChild>
+              <Link href="/nusa-share">
+                <HandHeart className="h-5 w-5" />
+                <span className="sr-only">Nusa-Share</span>
+              </Link>
+            </Button>
             <Button variant="ghost" size="icon" asChild>
               <Link href="/wishlist" className="relative">
                 {isLoaded && wishlist.length > 0 && (
