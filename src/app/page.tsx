@@ -73,7 +73,7 @@ export default function Home() {
                   <div className="absolute inset-0 bg-black/50" data-ai-hint={slide.bgAiHint} />
                   <div className="relative z-10 container mx-auto px-4 h-full grid grid-cols-1 md:grid-cols-2 items-center">
                     <div className="hidden md:flex justify-start items-center h-full">
-                       <div className="relative w-3/4 h-3/4 animate-fade-in-left">
+                       <div key={`image-${index}`} className="relative w-3/4 h-3/4 animate-fade-in-left">
                           <Image 
                               src={slide.productImageUrl} 
                               alt={slide.title} 
@@ -83,7 +83,7 @@ export default function Home() {
                           />
                        </div>
                     </div>
-                    <div className="flex flex-col items-center justify-center text-center md:items-start md:text-left text-white p-4 animate-fade-in-up">
+                    <div key={`text-${index}`} className="flex flex-col items-center justify-center text-center md:items-start md:text-left text-white p-4 animate-fade-in-up">
                       <h1 className="font-headline text-4xl font-bold md:text-6xl">
                         {slide.title}
                       </h1>
