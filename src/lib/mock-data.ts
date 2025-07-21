@@ -10,7 +10,7 @@ export const vendors: Vendor[] = [
   { id: 'vendor-1', name: 'Lilu Embrace', logoUrl: 'https://i.ibb.co/vvPy85dy/lilu.jpg', description: 'Cutting-edge electronics and gadgets for the modern world.' },
   { id: 'vendor-2', name: 'Green Fast Sawit', logoUrl: 'https://i.ibb.co/8vdphtR/20160519-IPB-Logo-001xx.jpg', description: 'Stylish and comfortable apparel for every occasion.' },
   { id: 'vendor-3', name: 'puka_id', logoUrl: 'https://i.ibb.co/zWH0P7ty/458657248-2500388056826089-9152992824544456283-n.jpg', description: 'Beautifully crafted goods to make your house a home.' },
-  { id: 'vendor-4', name: 'SUSBAG', logoUrl: 'https://i.ibb.co/KcbSdfP9/susbag.jpg', description: 'Fresh, organic, and locally sourced food products.' },
+  { id: 'vendor-4', name: 'SUSBAG', logoUrl: 'https://i.ibb.co/KcbSdfP9/susbag.jpg', description: 'Sustainable Bag hadir bukan hanya sebagai fashion, tetapi juga sebagai komitmen untuk bumi yang lebih hijau.' },
 ];
 
 export type ProductVariant = {
