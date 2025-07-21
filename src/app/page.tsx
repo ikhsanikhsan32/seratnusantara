@@ -56,7 +56,7 @@ export default function Home() {
     {
       title: 'Latest in Electronics',
       description: 'Explore cutting-edge gadgets that redefine your world.',
-      bgImageUrl: 'https://placehold.co/1600x900.png',
+      bgImageUrl: 'https://i.ibb.co/k2gNNyP/Frame-1-13.png',
       bgAiHint: 'modern gadgets',
       productImageUrl: 'https://placehold.co/400x500.png',
       productAiHint: 'smart watch',
