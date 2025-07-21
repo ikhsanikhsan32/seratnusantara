@@ -183,8 +183,12 @@ export const products: Product[] = [
     price: 250000,
     category: 'Accessories',
     rating: 4.8,
-    imageUrl: 'https://placehold.co/600x600.png',
-    imageUrls: ['https://placehold.co/800x800.png', 'https://placehold.co/800x800.png', 'https://placehold.co/800x800.png'],
+    imageUrl: 'https://i.ibb.co/qYFVPDgG/CATALOGUE-GREEN-FAST-pptx-7.jpg',
+    imageUrls: [
+      'https://i.ibb.co/qYFVPDgG/CATALOGUE-GREEN-FAST-pptx-7.jpg',
+      'https://i.ibb.co/5hN5vCS6/CATALOGUE-GREEN-FAST-pptx-8.jpg',
+      'https://i.ibb.co/tPMyb8pJ/CATALOGUE-GREEN-FAST-pptx-9.jpg'
+    ],
     description: 'Terbuat dari biokomposit serat tandan kosong kelapa sawit dan polimer, helm ringan digunakan, dan cocok digunakan untuk bersepeda.',
     availability: 'In Stock',
     reviews: 35,
@@ -546,3 +550,5 @@ export const newsItems: NewsItem[] = [
     { id: '3', text: '✨ New collection just dropped! Check out the latest trends.', link: '/shop' },
     { id: '4', text: 'Join our loyalty program and earn points on every purchase.' },
 ];
+
+    

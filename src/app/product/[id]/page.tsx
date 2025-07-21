@@ -101,11 +101,32 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 carouselApi.scrollTo(slideIndex, false);
             }
         }
+        if (product?.id === '15' && optionName === 'Model') {
+            const modelMap: Record<string, number> = {
+                'Model A': 1, 
+                'Model B': 1, 
+                'Model C': 2
+            };
+            const slideIndex = modelMap[value];
+            if (slideIndex !== undefined) {
+                carouselApi.scrollTo(slideIndex, false);
+            }
+        }
     }
   }, [carouselApi, product?.id]);
 
   const handleVariantHover = useCallback((variantName: string) => {
-    if (carouselApi && product?.id === '13' && product.variants?.name === 'Model') {
+    if (carouselApi && product?.id === '9' && product.variants?.name === 'Ukuran') {
+        const sizeMap: Record<string, number> = {
+            'Besar': 1,
+            'Sedang': 2,
+            'Kecil': 3,
+        };
+        const slideIndex = sizeMap[variantName];
+        if (slideIndex !== undefined) {
+            carouselApi.scrollTo(slideIndex, false);
+        }
+    } else if (carouselApi && product?.id === '13' && product.variants?.name === 'Model') {
         const modelMap: Record<string, number> = {
             'Tote Bag': 0,
             'Sling Bag': 1,
@@ -330,3 +351,5 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
     </div>
   );
 }
+
+    
