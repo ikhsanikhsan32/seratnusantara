@@ -53,11 +53,22 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
   const product = useMemo(() => products.find((p) => p.id === params.id), [params.id]);
   const vendor = useMemo(() => vendors.find(v => v.id === product?.vendorId), [product]);
-  const vendorProductsCount = useMemo(() => products.filter(p => p.vendorId === vendor?.id).length, [vendor]);
-  const otherVendorProducts = useMemo(() => {
+  
+  const vendorProducts = useMemo(() => {
     if (!vendor) return [];
-    return products.filter(p => p.vendorId === vendor.id && p.id !== params.id).slice(0, 6);
-  }, [vendor, params.id]);
+    return products.filter(p => p.vendorId === vendor.id);
+  }, [vendor]);
+  
+  const vendorProductsCount = vendorProducts.length;
+
+  const totalVendorReviews = useMemo(() => {
+    if (!vendor) return 0;
+    return vendorProducts.reduce((total, p) => total + (p.reviews || 0), 0);
+  }, [vendor, vendorProducts]);
+
+  const otherVendorProducts = useMemo(() => {
+    return vendorProducts.filter(p => p.id !== params.id).slice(0, 6);
+  }, [vendorProducts, params.id]);
 
 
   const [quantity, setQuantity] = useState(1);
@@ -414,7 +425,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <div className="flex gap-8 sm:ml-auto sm:text-right">
               <div>
                 <p className="text-sm text-muted-foreground">Penilaian</p>
-                <p className="font-bold text-primary">{product.reviews * 5 + 100}</p> 
+                <p className="font-bold text-primary">{totalVendorReviews}</p> 
               </div>
                <div>
                 <p className="text-sm text-muted-foreground">Produk</p>
