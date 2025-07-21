@@ -77,7 +77,7 @@ export default function Home() {
                           <Image 
                               src={slide.productImageUrl} 
                               alt={slide.title} 
-                              layout="fill"
+                              fill={true}
                               className="object-contain"
                               data-ai-hint={slide.productAiHint}
                           />
