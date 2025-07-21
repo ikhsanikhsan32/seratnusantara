@@ -21,24 +21,30 @@ export default function Home() {
     {
       title: 'Style for Every Story',
       description: 'Discover our new collection of curated items, designed to fit your life.',
-      imageUrl: 'https://placehold.co/1600x900.png',
-      aiHint: 'fashion store',
+      bgImageUrl: 'https://placehold.co/1600x900.png',
+      bgAiHint: 'fashion store',
+      productImageUrl: 'https://placehold.co/400x500.png',
+      productAiHint: 'fashion accessory',
       buttonText: 'Shop Now',
       buttonLink: '/shop',
     },
     {
       title: 'Latest in Electronics',
       description: 'Explore cutting-edge gadgets that redefine your world.',
-      imageUrl: 'https://placehold.co/1600x900.png',
-      aiHint: 'modern gadgets',
+      bgImageUrl: 'https://placehold.co/1600x900.png',
+      bgAiHint: 'modern gadgets',
+      productImageUrl: 'https://placehold.co/400x500.png',
+      productAiHint: 'smart watch',
       buttonText: 'Explore Gadgets',
       buttonLink: '/shop?category=electronics',
     },
     {
       title: 'Cozy Home Essentials',
       description: 'Transform your space with our unique home decor items.',
-      imageUrl: 'https://placehold.co/1600x900.png',
-      aiHint: 'living room decor',
+      bgImageUrl: 'https://placehold.co/1600x900.png',
+      bgAiHint: 'living room decor',
+      productImageUrl: 'https://placehold.co/400x500.png',
+      productAiHint: 'decorative lamp',
       buttonText: 'Decorate Your Home',
       buttonLink: '/shop?category=home',
     },
@@ -50,59 +56,57 @@ export default function Home() {
 
       {/* Hero Banner Section */}
       <section className="relative w-full h-[70vh] md:h-[80vh] overflow-hidden">
-        <div className="absolute inset-0 z-20 hidden md:flex items-center justify-center pointer-events-none">
-           <div className="relative w-1/4 h-1/2 -translate-x-[150%]">
-             <div className="absolute inset-0 animate-float">
-                <Image 
-                    src="https://placehold.co/400x500.png" 
-                    alt="Floating promotion" 
-                    width={400}
-                    height={500}
-                    className="object-contain"
-                    data-ai-hint="fashion accessory"
-                />
-             </div>
-           </div>
-        </div>
         <Carousel
           opts={{
             align: 'start',
             loop: true,
           }}
-          className="w-full h-full"
+          className="w-full h-full group/hero"
         >
           <CarouselContent>
             {heroSlides.map((slide, index) => (
               <CarouselItem key={index}>
                 <div
                   className="relative h-[70vh] md:h-[80vh] w-full bg-cover bg-center"
-                  style={{ backgroundImage: `url('${slide.imageUrl}')` }}
-                  data-ai-hint={slide.aiHint}
+                  style={{ backgroundImage: `url('${slide.bgImageUrl}')` }}
                 >
-                  <div className="absolute inset-0 bg-black/50" />
-                  <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white p-4">
-                    <h1 className="font-headline text-4xl font-bold md:text-6xl">
-                      {slide.title}
-                    </h1>
-                    <p className="mt-4 max-w-2xl text-lg">
-                      {slide.description}
-                    </p>
-                    <Button
-                      asChild
-                      className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90"
-                      size="lg"
-                    >
-                      <Link href={slide.buttonLink}>
-                        {slide.buttonText} <ArrowRight className="ml-2" />
-                      </Link>
-                    </Button>
+                  <div className="absolute inset-0 bg-black/50" data-ai-hint={slide.bgAiHint} />
+                  <div className="relative z-10 container mx-auto px-4 h-full grid grid-cols-1 md:grid-cols-2 items-center">
+                    <div className="hidden md:flex justify-center items-center h-full">
+                       <div className="relative w-3/4 h-3/4 animate-fade-in-left">
+                          <Image 
+                              src={slide.productImageUrl} 
+                              alt={slide.title} 
+                              layout="fill"
+                              className="object-contain"
+                              data-ai-hint={slide.productAiHint}
+                          />
+                       </div>
+                    </div>
+                    <div className="flex flex-col items-center justify-center text-center md:items-start md:text-left text-white p-4 animate-fade-in-up">
+                      <h1 className="font-headline text-4xl font-bold md:text-6xl">
+                        {slide.title}
+                      </h1>
+                      <p className="mt-4 max-w-lg text-lg">
+                        {slide.description}
+                      </p>
+                      <Button
+                        asChild
+                        className="mt-8 bg-accent text-accent-foreground hover:bg-accent/90"
+                        size="lg"
+                      >
+                        <Link href={slide.buttonLink}>
+                          {slide.buttonText} <ArrowRight className="ml-2" />
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="absolute left-4 z-10" />
-          <CarouselNext className="absolute right-4 z-10" />
+          <CarouselPrevious className="absolute left-4 z-10 transition-opacity opacity-0 group-hover/hero:opacity-100" />
+          <CarouselNext className="absolute right-4 z-10 transition-opacity opacity-0 group-hover/hero:opacity-100" />
         </Carousel>
       </section>
 
