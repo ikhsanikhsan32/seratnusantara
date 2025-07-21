@@ -70,7 +70,7 @@ export default function Home() {
       buttonLink: 'https://youtu.be/LvjrbFRXMPw?si=BMiX-ooO9Cjz1_tu',
     },
     {
-      title: 'Cozy Home Essentials',
+      title: 'Limbah Sawit Juga Berguna!',
       description: 'Transform your space with our unique home decor items.',
       bgImageUrl: 'https://placehold.co/1600x900.png',
       bgAiHint: 'living room decor',
