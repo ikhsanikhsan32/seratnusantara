@@ -41,11 +41,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* NusaLoyalty Section */}
+          {/* Nusa-Share Section */}
           <div>
-            <h3 className="font-headline font-semibold">NusaLoyalty</h3>
+            <h3 className="font-headline font-semibold">Nusa-Share</h3>
             <p className="mt-4 text-sm text-muted-foreground">
-              NusaLoyalty adalah program keanggotaan berjenjang dari SeratNusantara yang memberikan berbagai keuntungan eksklusif bagi pengguna setia yang aktif bertransaksi, berdonasi, atau mengikuti aktivitas di platform. Semakin sering Anda berbelanja atau berkontribusi, semakin tinggi level Anda dan semakin banyak benefitnya, seperti voucher gratis ongkir dan diskon.
+              Nusa-Share – Fitur donasi dan jual-beli pakaian bekas yang masih layak pakai. Pengguna dapat mendonasikan atau menjual pakaian bekas mereka melalui SeratNusantara, yang kemudian akan disaring dan dikurasi untuk memastikan kualitas bahan yang masih dapat diolah kembali. Pakaian yang memenuhi standar akan diproses menjadi produk baru bernilai lebih tinggi atau diberikan kepada mitra yang tepat.
             </p>
           </div>
         </div>
