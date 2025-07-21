@@ -83,6 +83,23 @@ export const products: Product[] = [
     }],
     customerReviews: []
   },
+  {
+    id: '33',
+    name: 'Kalung Tali Ronce Premium',
+    price: 25000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/N21LVR7q/20241024-195957.jpg',
+    imageUrls: [
+        'https://i.ibb.co/N21LVR7q/20241024-195957.jpg',
+    ],
+    description: "Add a sprinkle of enchantment to your neckline with the 🧚‍♀️ Fairy Necklace 🧚‍♂️ – because magic deserves to shine close to your heart.\n\nKalung manik-manik yang eksklusif, unik, dan tahan lama – hadir untuk menambahkan sentuhan ajaib pada setiap gaya.",
+    availability: 'In Stock',
+    reviews: 25,
+    aiHint: 'rope necklace',
+    vendorId: 'vendor-1',
+    customerReviews: []
+  },
   { id: '2', name: 'Wireless Noise-Cancelling Headphones', price: 2499000, category: 'Accessories', rating: 4.8, imageUrl: 'https://placehold.co/600x600.png', description: 'Immerse yourself in sound with these premium headphones.', availability: 'In Stock', reviews: 250, aiHint: 'headphones', vendorId: 'vendor-1' },
   // Green Fast Sawit Products
   {
