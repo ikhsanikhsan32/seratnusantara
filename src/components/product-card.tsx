@@ -113,9 +113,8 @@ export function ProductCard({ product }: ProductCardProps) {
           )}
           <div className="mt-4 flex flex-1 items-end justify-between">
             <p className="text-lg font-bold text-primary">{formatPrice(product.price)}</p>
-            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" onClick={handleAddToCart}>
-              <ShoppingCart className="mr-2 h-4 w-4" />
-              Add to Cart
+            <Button size="icon" className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 w-9" onClick={handleAddToCart} aria-label="Add to Cart">
+              <ShoppingCart className="h-4 w-4" />
             </Button>
           </div>
         </div>
