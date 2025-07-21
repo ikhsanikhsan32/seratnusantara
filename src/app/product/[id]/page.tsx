@@ -143,6 +143,19 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 carouselApi.scrollTo(slideIndex, false);
             }
         }
+        if (product?.id === '32' && optionName === 'Model') {
+            const modelMap: Record<string, number> = {
+                'Model 1': 0,
+                'Model 2': 1,
+                'Model 3': 2,
+                'Model 4': 3,
+                'Model 5': 4,
+            };
+            const slideIndex = modelMap[value];
+            if (slideIndex !== undefined) {
+                carouselApi.scrollTo(slideIndex, false);
+            }
+        }
     }
   }, [carouselApi, product?.id]);
 
@@ -348,9 +361,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                       <Label
                         htmlFor={`${option.id}-${value}`}
                         onMouseEnter={() => {
-                          if (option.name !== 'Ukuran') {
-                            handleOptionChange(option.name, value)
-                          }
+                          handleOptionChange(option.name, value)
                         }}
                         className="flex items-center justify-center rounded-md border-2 border-muted bg-popover px-4 py-2 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
                       >

@@ -57,6 +57,32 @@ export type Product = {
 };
 
 export const products: Product[] = [
+  { 
+    id: '32',
+    name: 'Paket Gelang dan Cincin Manik',
+    price: 10000,
+    category: 'Accessories',
+    rating: 4.9,
+    imageUrl: 'https://i.ibb.co/fVVyML4G/20231223-154048.jpg',
+    imageUrls: [
+        'https://i.ibb.co/fVVyML4G/20231223-154048.jpg',
+        'https://i.ibb.co/Ldd19t2D/20231223-154512.jpg',
+        'https://i.ibb.co/Pz1G3z0v/20231223-155325.jpg',
+        'https://i.ibb.co/6RkyWvXN/20231223-154748.jpg',
+        'https://i.ibb.co/PZhPbxbD/20231223-155230.jpg',
+    ],
+    description: "Add a magical touch to your wrist with the 🧚‍♂️ Fairy Bracelet 🧚‍♀️– because who says fairies can’t be stylish?\n\nGelang serta cincin manik-manik yang eksklusif, unik, dan tahan lama.",
+    availability: 'In Stock',
+    reviews: 30,
+    aiHint: 'beaded bracelet ring',
+    vendorId: 'vendor-1',
+    options: [{
+        id: 'paket-manik-model',
+        name: 'Model',
+        values: ['Model 1', 'Model 2', 'Model 3', 'Model 4', 'Model 5'],
+    }],
+    customerReviews: []
+  },
   { id: '2', name: 'Wireless Noise-Cancelling Headphones', price: 2499000, category: 'Accessories', rating: 4.8, imageUrl: 'https://placehold.co/600x600.png', description: 'Immerse yourself in sound with these premium headphones.', availability: 'In Stock', reviews: 250, aiHint: 'headphones', vendorId: 'vendor-1' },
   // Green Fast Sawit Products
   {
